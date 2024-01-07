@@ -1,0 +1,98 @@
+.tw-none button {
+  touch-action: none;
+}
+
+.tw-none * {
+  @apply leading-relaxed;
+}
+
+.tw-none h1 {
+  @apply my-2 text-xl font-semibold;
+}
+.tw-none h2 {
+  @apply my-2 text-lg font-semibold;
+}
+.tw-none h3 {
+  @apply my-2 text-base font-semibold;
+}
+
+.tw-none h4 {
+  @apply my-2 text-sm font-semibold;
+}
+
+.tw-none h5 {
+  @apply my-2 text-xs font-semibold;
+}
+
+.tw-none h6 {
+  @apply my-2 text-xs font-semibold;
+}
+
+.tw-none p,
+.tw-none span {
+  @apply my-1 break-all;
+}
+
+.tw-none ul {
+  @apply my-3 px-6;
+}
+
+.tw-none strong {
+  @apply font-semibold;
+}
+
+.tw-none ul li {
+  @apply list-disc;
+}
+
+.tw-none ol {
+  @apply my-2 px-6;
+}
+
+.tw-none ol li {
+  @apply list-decimal;
+}
+
+.tw-none blockquote {
+  @apply my-2 border-l-4 p-1 pl-4;
+}
+
+.tw-none hr {
+  @apply my-3 border-skin-color/30;
+}
+
+.tw-none tr,
+.tw-none td,
+.tw-none thead,
+.tw-none tbody,
+.tw-none th {
+  @apply m-1 border-2 border-skin-color/20 p-1 px-3 text-left;
+}
+
+.tw-none th {
+  @apply font-semibold;
+}
+
+.tw-none pre {
+  @apply my-2 overflow-x-auto rounded bg-skin-color/5 p-3 shadow-sm;
+}
+
+.tw-none code {
+  @apply font-sans;
+}
+
+.tw-none table {
+  @apply my-5 overflow-hidden rounded-sm;
+}
+
+.tw-none a {
+  @apply w-fit rounded-sm font-medium text-[#146dad] decoration-2 underline-offset-2 outline-none hover:underline hover:opacity-70 focus:underline;
+}
+
+.tw-none img {
+  @apply pointer-events-none h-52 w-fit rounded bg-skin-color/10 object-cover;
+}
+
+.tw-none input[type="checkbox"] {
+  @apply relative top-[2px] aspect-square w-4 appearance-none rounded-sm border-2 border-skin-color/50 after:absolute after:-top-[2px] after:left-[2px] after:hidden after:aspect-square after:w-1 after:text-xs after:content-['\2713'] checked:after:block;
+}
