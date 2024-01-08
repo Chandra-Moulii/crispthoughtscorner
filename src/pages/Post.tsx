@@ -191,7 +191,7 @@ export default function Post() {
       >
         <div
           data-title={alt}
-          className="after:from-black-500 h-96 relative max-w-3xl select-none after:absolute after:top-0 after:h-16 after:w-full after:bg-gradient-to-b after:from-black/70 after:to-transparent after:px-3 after:py-2 after:font-medium after:text-white/80 after:md:text-lg md:after:content-[attr(data-title)]"
+          className="after:from-black-500 relative max-w-3xl select-none after:absolute after:top-0 after:h-16 after:w-full after:bg-gradient-to-b after:from-black/70 after:to-transparent after:px-3 after:py-2 after:font-medium after:text-white/80 after:md:text-lg md:after:content-[attr(data-title)]"
         >
           <button
             autoFocus
@@ -205,7 +205,7 @@ export default function Post() {
               <path d="m251.333-204.667-46.666-46.666L433.334-480 204.667-708.667l46.666-46.666L480-526.666l228.667-228.667 46.666 46.666L526.666-480l228.667 228.667-46.666 46.666L480-433.334 251.333-204.667Z" />
             </svg>
           </button>
-          <img src={imageSrc} draggable={false} className="object-cover w-full h-full" />
+          <img src={imageSrc} draggable={false} />
         </div>
       </dialog>
     </div>

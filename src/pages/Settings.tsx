@@ -84,12 +84,15 @@ export default function Settings() {
         </button>
       </section>
       {user?.email_verified ? null : (
-        <div className="flex items-center justify-between rounded-sm bg-skin-accent/10 px-3 py-2">
+        <div className="flex flex-wrap items-center justify-between gap-4 rounded-sm bg-skin-accent/10 px-3 py-2 md:flex-nowrap">
           <div>
             <p className="mb-[2px] font-semibold text-skin-accent">
               Verify your email
             </p>
-            <p className="text-xs">Verify your email for extra protection.</p>
+            <p className="text-xs">
+              Verify your email address immediately for
+              protection.
+            </p>
           </div>
           <button
             onClick={verifyEmail}
@@ -99,7 +102,7 @@ export default function Settings() {
           </button>
         </div>
       )}
-      <div className="mt-2 flex flex-wrap items-center justify-between gap-4 rounded-sm bg-skin-error/5 px-3 py-2">
+      <div className="mt-2 flex flex-wrap items-center justify-between gap-4 rounded-sm bg-skin-error/5 px-3 py-2 md:flex-nowrap">
         <div>
           <p className="mb-[2px] font-semibold text-skin-error">
             Delete my account
