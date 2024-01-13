@@ -30,7 +30,7 @@
 
 .tw-none p,
 .tw-none span {
-  @apply my-1 break-all;
+  @apply my-1 break-words;
 }
 
 .tw-none ul {

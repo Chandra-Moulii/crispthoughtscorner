@@ -2,6 +2,7 @@ import { MouseEvent, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 import supabase from "../supabase";
 import Header from "../components/stateless/Header";
@@ -9,6 +10,7 @@ import Pagination from "../components/stateless/Pagination";
 import { closeDialog, openDialog } from "../utils/HandleDialogs";
 import LinkButton from "../components/stateless/LinkButton";
 import Spinner from "../components/stateless/Spinner";
+import ToastMessage from "../components/stateless/Toast";
 
 export default function Posts() {
   const ITMESPERPAGE = 15;
@@ -63,9 +65,13 @@ export default function Posts() {
       post.postTitle.toLowerCase().includes(searchValue.toLowerCase()),
     );
   }
+  if (error !== null && !isLoading) {
+    toast.error("Oops! Somthing went wrong. Try again later");
+  }
 
   return (
     <div>
+      <ToastMessage />
       <Header title={`Your posts (${data?.length})`} />
       <section className="my-1 flex flex-wrap items-center gap-2">
         <LinkButton name="New Post" to="/newpost" />
@@ -110,7 +116,7 @@ export default function Posts() {
         ) : null}
 
         {isLoading && !error ? (
-          <Spinner info="" />
+          <Spinner info="Fetching posts..." />
         ) : (
           <>
             {filterPosts()?.map((post) => {

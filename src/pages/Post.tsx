@@ -1,9 +1,9 @@
+import { toast } from "sonner";
 import Markdown from "markdown-to-jsx";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
-import { Toaster, toast } from "sonner";
 
 import "../assets/markdown.css";
 import supabase from "../supabase";
@@ -13,6 +13,7 @@ import useDarkMode from "../customHooks/useDarkmode";
 import { openDialog, closeDialog } from "../utils/HandleDialogs";
 import ImageDecoy from "../components/stateless/ImageDecoy";
 import Spinner from "../components/stateless/Spinner";
+import ToastMessage from "../components/stateless/Toast";
 
 export default function Post() {
   const { id } = useParams();
@@ -139,17 +140,7 @@ export default function Post() {
               </button>
             </span>
             <span>
-              <Toaster
-                richColors
-                closeButton
-                position="top-center"
-                visibleToasts={1}
-                toastOptions={{
-                  classNames: {
-                    toast: "!p-3 !-my-1",
-                  },
-                }}
-              />
+              <ToastMessage />
               <button
                 className="group rounded-sm p-[2.5px] opacity-80 outline-none hover:opacity-100 focus-visible:opacity-100"
                 onClick={() => copy(data.postDescription, "Markdown copied")}

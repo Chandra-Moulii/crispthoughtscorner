@@ -56,7 +56,7 @@ export default function AuthorPosts() {
         value={searchValue}
         onChange={(event) => setSearchValue(event.target.value)}
         placeholder="Search posts"
-        className="w-full flex-grow rounded-sm border-2 border-skin-color/40 bg-skin-background px-2 py-1 outline-none ring-skin-color/30 placeholder:text-skin-color/30 focus:ring-2"
+        className="w-full flex-grow rounded-sm border-2 mt-1 border-skin-color/40 bg-skin-background px-2 py-1 outline-none ring-skin-color/30 placeholder:text-skin-color/30 focus:ring-2"
       />
       <hr className="mt-3 border-skin-color/10" />
 
@@ -82,7 +82,7 @@ export default function AuthorPosts() {
         ) : null}
 
         {isLoading && !error ? (
-          <Spinner info="" />
+          <Spinner info="Fetching posts..." />
         ) : (
           <>
             {filterPosts()?.map((post) => {

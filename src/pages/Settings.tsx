@@ -4,7 +4,8 @@ import { useLayoutEffect, useRef, useState } from "react";
 import Header from "../components/stateless/Header";
 import { closeDialog } from "../utils/HandleDialogs";
 import { Link } from "react-router-dom";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
+import ToastMessage from "../components/stateless/Toast";
 
 export default function Settings() {
   const [theme, setTheme] = useState("light");
@@ -25,11 +26,11 @@ export default function Settings() {
   }
 
   function deleteAccount() {
-    toast.info("Coming soon: You can delete your account.");
+    toast.info("Delete account - Coming soon...");
   }
 
   function verifyEmail() {
-    toast.info("Coming soon....");
+    toast.info("Verify account - Coming soon...");
   }
 
   useLayoutEffect(() => {
@@ -43,17 +44,7 @@ export default function Settings() {
 
   return (
     <div>
-      <Toaster
-        richColors
-        closeButton
-        position="top-center"
-        visibleToasts={1}
-        toastOptions={{
-          classNames: {
-            toast: "!p-3 !-my-1",
-          },
-        }}
-      />
+      <ToastMessage />
       <Header title="Settings" />
       <div className="group relative my-2 w-fit select-none">
         <img
@@ -90,8 +81,7 @@ export default function Settings() {
               Verify your email
             </p>
             <p className="text-xs">
-              Verify your email address immediately for
-              protection.
+              Verify your email address immediately for protection.
             </p>
           </div>
           <button

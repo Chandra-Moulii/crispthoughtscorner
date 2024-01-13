@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 import supabase from "../supabase";
 import Pagination from "../components/stateless/Pagination";
 import LinkButton from "../components/stateless/LinkButton";
 import Spinner from "../components/stateless/Spinner";
+import ToastMessage from "../components/stateless/Toast";
 
 export default function Feed() {
   const ITMESPERPAGE = 20;
@@ -37,9 +39,13 @@ export default function Feed() {
       post.postTitle.toLowerCase().includes(searchValue.toLowerCase()),
     );
   }
+  if (error !== null && !isLoading) {
+    toast.error("Oops! Somthing went wrong. Try again later");
+  }
 
   return (
     <div>
+      <ToastMessage />
       <header className="flex items-center justify-between py-3">
         <a
           href={window.location.origin + window.location.pathname}
@@ -90,14 +96,9 @@ export default function Feed() {
             </button>
           </p>
         ) : null}
-        {error !== null && !isLoading ? (
-          <p className="text-skin-error">
-            Something went wrong please refresh the page
-          </p>
-        ) : null}
 
         {isLoading && !error ? (
-          <Spinner info="" />
+          <Spinner info="Fetching posts..." />
         ) : (
           <>
             {filterPosts()?.map((post: postType) => {

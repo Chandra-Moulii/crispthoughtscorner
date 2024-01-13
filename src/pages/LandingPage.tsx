@@ -69,7 +69,7 @@ export default function LandingPage() {
 
   useDarkMode();
 
-  if (isLoading) return <Spinner info="Loading..." />;
+  if (isLoading) return <Spinner info="Authenticating..." />;
 
   return (
     <div className="pt-7">

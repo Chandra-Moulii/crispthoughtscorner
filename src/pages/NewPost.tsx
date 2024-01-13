@@ -19,7 +19,7 @@ export default function NewPost() {
   const btnref = useRef<HTMLButtonElement | null>(null);
   const [postDescription, setPostDescription] = useState("");
   const dialogref = useRef<HTMLDialogElement | null>(null);
-
+  const censoredWords = ["fuck", "bitch", "pussy", "suck", "dick"];
   function sanitizePostDescription(
     event: React.ChangeEvent<HTMLTextAreaElement>,
   ) {
@@ -38,6 +38,10 @@ export default function NewPost() {
       }),
     );
   }
+  function censoredText(text: string) {
+    const regex = new RegExp(censoredWords.join("|"), "gi");
+    return text.replace(regex, (item) => item.slice(0, -1) + "*");
+  }
 
   async function addPost(event: React.FormEvent) {
     event.preventDefault();
@@ -51,8 +55,8 @@ export default function NewPost() {
       return;
     }
     const newPost = {
-      postTitle: posTitle.value.trim(),
-      postDescription: DOMPurify.sanitize(postDescription.trim()),
+      postTitle: censoredText(posTitle.value.trim()),
+      postDescription: censoredText(DOMPurify.sanitize(postDescription.trim())),
       postAuthor: user?.email,
     };
     const target = btnref.current as HTMLButtonElement;
