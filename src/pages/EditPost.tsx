@@ -1,25 +1,33 @@
 import DOMPurify from "dompurify";
-import { useState, useRef, useEffect } from "react";
 import Markdown from "markdown-to-jsx";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link, useNavigate } from "react-router-dom";
-
+import { useState, useRef, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "../assets/markdown.css";
-import supabase from "../../supabase";
-import { openDialog, closeDialog } from "../../utils/HandleDialogs";
-import ImageDecoy from "../stateless/ImageDecoy";
-import Header from "../stateless/Header";
+import supabase from "../supabase";
+import Header from "../components/stateless/Header";
+import ImageDecoy from "../components/stateless/ImageDecoy";
+import { toast } from "sonner";
 
 export default function EditPost() {
   const { user } = useAuth0();
   const navigate = useNavigate();
+  const params = useParams();
   const ref = useRef<HTMLInputElement | null>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [previewState, setPreviewState] = useState(false);
   const btnref = useRef<HTMLButtonElement | null>(null);
   const [postDescription, setPostDescription] = useState("");
-  const dialogref = useRef<HTMLDialogElement | null>(null);
-  const censoredWords = ["fuck", "bitch", "pussy", "suck", "dick"];
+  const censoredWords = [
+    "fuck",
+    "bitch",
+    "pussy",
+    "suck",
+    "dick",
+    "nigga",
+    "sadist",
+  ];
   function sanitizePostDescription(
     event: React.ChangeEvent<HTMLTextAreaElement>,
   ) {
@@ -43,10 +51,10 @@ export default function EditPost() {
     return text.replace(regex, (item) => item.slice(0, -1) + "*");
   }
 
-  async function addPost(event: React.FormEvent) {
+  async function editPost(event: React.FormEvent) {
     event.preventDefault();
     const posTitle = ref.current as HTMLInputElement;
-    if (!posTitle.value.trimStart()) {
+    if (!posTitle.value.trimStart() || posTitle.value.length < 5) {
       posTitle.focus();
       return;
     }
@@ -54,7 +62,7 @@ export default function EditPost() {
       if (textAreaRef.current) textAreaRef.current.focus();
       return;
     }
-    const newPost = {
+    const editedPost = {
       postTitle: censoredText(posTitle.value.trim()),
       postDescription: censoredText(DOMPurify.sanitize(postDescription.trim())),
       postAuthor: user?.email,
@@ -62,33 +70,43 @@ export default function EditPost() {
     const target = btnref.current as HTMLButtonElement;
     target.innerText = "Posting...";
     target.disabled = true;
-    await supabase.from("Posts").insert(newPost).select();
+    await supabase
+      .from("Posts")
+      .update(editedPost)
+      .eq("id", params.id)
+      .select();
     target.innerText = "Post";
     navigate(-1);
-  }
-
-  function close() {
-    const posTitle = ref.current as HTMLInputElement;
-    if (postDescription !== "" || posTitle.value !== "") {
-      openDialog(dialogref);
-      return false;
-    }
-    return true;
+    toast.success("successfully edited");
   }
 
   function closeNewPost() {
-    if (!close()) return;
     navigate(-1);
   }
 
+  const getpost = useCallback(async () => {
+    const { data: Post } = await supabase
+      .from("Posts")
+      .select("*")
+      .eq("id", params.id);
+    if (!Post) return;
+    if (ref.current) {
+      ref.current.value = Post[0].postTitle;
+    }
+    if (textAreaRef.current) {
+      textAreaRef.current.value = Post[0].postDescription;
+      setPostDescription(Post[0].postDescription);
+    }
+  }, [params.id]);
+
   useEffect(() => {
-    document.title = "CrispThoughtsCorner - New Post";
-  }, []);
+    getpost();
+  }, [getpost]);
 
   return (
     <div className="font-medium">
-      <Header title="New Post" fn={close} />
-      <form onSubmit={addPost} className="my-2">
+      <Header title="Edit Post" />
+      <form onSubmit={editPost} className="my-2">
         <label htmlFor="postTitle" className="text-sm text-skin-color/60">
           Post Title
         </label>
@@ -172,47 +190,10 @@ export default function EditPost() {
             ref={btnref}
             className="rounded-sm bg-skin-accent px-3 py-1 text-white outline-none ring-skin-accent/60 hover:bg-skin-accent/80 focus-visible:ring disabled:opacity-50 disabled:hover:border-skin-color/10"
           >
-            Post
+            Confirm
           </button>
         </div>
       </form>
-
-      <dialog
-        data-state="closed"
-        ref={dialogref}
-        className="animate-pop rounded border-0 bg-skin-background px-4 py-3 text-left text-skin-color outline-none backdrop:bg-black/80 sm:max-w-sm md:max-w-sm"
-      >
-        <header className="flex items-center justify-between gap-2">
-          <h3 className="text-lg font-semibold">Unsaved Changes</h3>
-          <button
-            className="rounded-sm p-[1px] outline-none ring-skin-error/40 focus:ring"
-            onClick={() => closeDialog(dialogref)}
-          >
-            <svg
-              viewBox="0 -960 960 960"
-              className="aspect-square w-5 fill-skin-color/70"
-            >
-              <path d="M256-192.348 192.348-256l224-224-224-224L256-767.652l224 224 224-224L767.652-704l-224 224 224 224L704-192.348l-224-224-224 224Z" />
-            </svg>
-          </button>
-        </header>
-        <hr className="my-2 border-skin-color/20" />
-        <p className="my-2">Considering Discarding Your Changes?</p>
-        <div className="flex items-center justify-end gap-2">
-          <button
-            onClick={() => closeDialog(dialogref)}
-            className="rounded-sm bg-skin-accent px-3 py-1 text-white outline-none ring-skin-accent/60 hover:bg-skin-accent/80 focus-visible:ring"
-          >
-            Keep
-          </button>
-          <Link
-            to="/home"
-            className="rounded-sm bg-skin-error px-3 py-1 text-white outline-none ring-skin-error/60 hover:bg-skin-error/80 focus-visible:ring"
-          >
-            Discard
-          </Link>
-        </div>
-      </dialog>
     </div>
   );
 }

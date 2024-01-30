@@ -138,9 +138,12 @@ export default function Posts() {
                     {post.postTitle}
                   </Link>
                   <div className="flex items-center gap-3">
-                    <button className="block font-medium text-skin-accent/90 underline decoration-skin-accent decoration-1 underline-offset-2 outline-none ring-skin-accent/30 hover:decoration-2 focus:decoration-2">
+                    <Link
+                      to={`/posts/edit/${post.id}`}
+                      className="block font-medium text-skin-accent/90 underline decoration-skin-accent decoration-1 underline-offset-2 outline-none ring-skin-accent/30 hover:decoration-2 focus:decoration-2"
+                    >
                       Edit
-                    </button>
+                    </Link>
                     <button
                       onClick={(event) => deletePost(post.id, event)}
                       className="block font-medium text-skin-error/90 underline decoration-skin-error decoration-1 underline-offset-2 outline-none ring-skin-accent/30 hover:decoration-2 focus:decoration-2"

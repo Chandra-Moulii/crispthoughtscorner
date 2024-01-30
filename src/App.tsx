@@ -9,6 +9,7 @@ import Settings from "./pages/Settings";
 import NewPost from "./pages/NewPost";
 import AuthorPosts from "./pages/AuthorPosts";
 import LandingPage from "./pages/LandingPage";
+import EditPost from "./pages/EditPost";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/home" element={<Protect el={<Feed />} />} />
         <Route path="/:username/:id" element={<Post />} />
         <Route path="/posts" element={<Protect el={<Posts />} />} />
+        <Route path="/posts/edit/:id" element={<Protect el={<EditPost />} />} />
         <Route path="/posts/:id" element={<Protect el={<Post />} />} />
         <Route path="/:username" element={<Protect el={<AuthorPosts />} />} />
         <Route path="/newpost" element={<Protect el={<NewPost />} />} />
