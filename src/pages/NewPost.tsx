@@ -9,7 +9,6 @@ import supabase from "../supabase";
 import { openDialog, closeDialog } from "../utils/HandleDialogs";
 import ImageDecoy from "../components/stateless/ImageDecoy";
 import Header from "../components/stateless/Header";
-import { toast } from "sonner";
 
 export default function NewPost() {
   const { user } = useAuth0();
