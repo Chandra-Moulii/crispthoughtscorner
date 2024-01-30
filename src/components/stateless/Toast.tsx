@@ -5,7 +5,7 @@ export default function ToastMessage() {
     <Toaster
       richColors
       closeButton
-      position="top-right"
+      position="bottom-right"
       toastOptions={{
         classNames: {
           toast: "!p-3 !-my-1",

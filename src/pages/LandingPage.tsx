@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import Spinner from "../components/stateless/Spinner";
 import useDarkMode from "../customHooks/useDarkmode";
+
 export default function LandingPage() {
   const navigate = useNavigate();
   const titles = ["Ideas", "Visions", "Insights"];

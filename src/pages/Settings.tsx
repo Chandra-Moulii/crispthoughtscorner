@@ -9,6 +9,7 @@ import ToastMessage from "../components/stateless/Toast";
 
 export default function Settings() {
   const [theme, setTheme] = useState("light");
+
   const dialogref = useRef<HTMLDialogElement | null>(null);
   const { logout: logoutWithRedirect, user } = useAuth0();
 

@@ -5,13 +5,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Link, useNavigate } from "react-router-dom";
 
 import "../assets/markdown.css";
-import supabase from "../supabase";
-import { openDialog, closeDialog } from "../utils/HandleDialogs";
-import ImageDecoy from "../components/stateless/ImageDecoy";
-import Header from "../components/stateless/Header";
-import { toast } from "sonner";
+import supabase from "../../supabase";
+import { openDialog, closeDialog } from "../../utils/HandleDialogs";
+import ImageDecoy from "../stateless/ImageDecoy";
+import Header from "../stateless/Header";
 
-export default function NewPost() {
+export default function EditPost() {
   const { user } = useAuth0();
   const navigate = useNavigate();
   const ref = useRef<HTMLInputElement | null>(null);
@@ -20,15 +19,7 @@ export default function NewPost() {
   const btnref = useRef<HTMLButtonElement | null>(null);
   const [postDescription, setPostDescription] = useState("");
   const dialogref = useRef<HTMLDialogElement | null>(null);
-  const censoredWords = [
-    "fuck",
-    "bitch",
-    "pussy",
-    "suck",
-    "dick",
-    "nigga",
-    "sadist",
-  ];
+  const censoredWords = ["fuck", "bitch", "pussy", "suck", "dick"];
   function sanitizePostDescription(
     event: React.ChangeEvent<HTMLTextAreaElement>,
   ) {
@@ -55,7 +46,7 @@ export default function NewPost() {
   async function addPost(event: React.FormEvent) {
     event.preventDefault();
     const posTitle = ref.current as HTMLInputElement;
-    if (!posTitle.value.trimStart() || posTitle.value.length < 5) {
+    if (!posTitle.value.trimStart()) {
       posTitle.focus();
       return;
     }
@@ -206,9 +197,7 @@ export default function NewPost() {
           </button>
         </header>
         <hr className="my-2 border-skin-color/20" />
-        <p className="my-2">
-          Your Creativity is at Play! Considering Discarding Your Changes?
-        </p>
+        <p className="my-2">Considering Discarding Your Changes?</p>
         <div className="flex items-center justify-end gap-2">
           <button
             onClick={() => closeDialog(dialogref)}

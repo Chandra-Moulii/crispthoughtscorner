@@ -2,7 +2,7 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 
 import Feed from "./pages/Feed";
 import Post from "./pages/Post";
-import Posts from "./pages/Posts";
+import Posts from "./pages/YourPosts";
 import NotFound from "./components/stateless/404";
 import Protect from "./components/stateful/Protect";
 import Settings from "./pages/Settings";

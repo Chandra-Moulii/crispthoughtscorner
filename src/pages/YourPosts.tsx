@@ -44,8 +44,11 @@ export default function Posts() {
     target.blur();
     target.innerText = "Deleting...";
     target.disabled = true;
-    const previousSibling = target.previousElementSibling as HTMLAnchorElement;
-    if (previousSibling) previousSibling.style.pointerEvents = "none";
+    const previousSibling = target.closest("#post") as HTMLDivElement;
+    if (previousSibling) {
+      previousSibling.style.pointerEvents = "none";
+      previousSibling.style.opacity = "0.5";
+    }
     await supabase.from("Posts").delete().eq("id", postId);
     queryClient.invalidateQueries({ queryKey: ["userposts", page] });
   }
@@ -56,6 +59,7 @@ export default function Posts() {
       .delete()
       .eq("postAuthor", user?.email);
     closeDialog(dialogref);
+
     queryClient.invalidateQueries({ queryKey: ["userposts", page] });
   }
 
@@ -122,6 +126,7 @@ export default function Posts() {
             {filterPosts()?.map((post) => {
               return (
                 <div
+                  id="post"
                   className="my-1 flex items-center justify-between gap-3"
                   key={post.id}
                 >
@@ -132,12 +137,17 @@ export default function Posts() {
                   >
                     {post.postTitle}
                   </Link>
-                  <button
-                    onClick={(event) => deletePost(post.id, event)}
-                    className="block font-medium text-skin-error/90 underline decoration-skin-error decoration-1 underline-offset-2 outline-none ring-skin-accent/30 hover:decoration-2 focus:decoration-2 disabled:opacity-60 disabled:hover:decoration-0"
-                  >
-                    Delete
-                  </button>
+                  <div className="flex items-center gap-3">
+                    <button className="block font-medium text-skin-accent/90 underline decoration-skin-accent decoration-1 underline-offset-2 outline-none ring-skin-accent/30 hover:decoration-2 focus:decoration-2">
+                      Edit
+                    </button>
+                    <button
+                      onClick={(event) => deletePost(post.id, event)}
+                      className="block font-medium text-skin-error/90 underline decoration-skin-error decoration-1 underline-offset-2 outline-none ring-skin-accent/30 hover:decoration-2 focus:decoration-2"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
               );
             })}
