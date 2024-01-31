@@ -29,8 +29,7 @@ export default function Post() {
   const [moveToTopButtonVisible, setMoveToTopButtonStatus] = useState(false);
 
   const { data, isLoading, error } = useQuery(["post", id], fetchPost, {
-    refetchOnWindowFocus: false,
-    staleTime: Infinity,
+    refetchInterval: 10000,
     retry: 1,
   });
 

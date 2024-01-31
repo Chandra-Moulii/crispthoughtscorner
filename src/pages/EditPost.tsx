@@ -9,6 +9,8 @@ import supabase from "../supabase";
 import Header from "../components/stateless/Header";
 import ImageDecoy from "../components/stateless/ImageDecoy";
 import { toast } from "sonner";
+import { useQuery } from "@tanstack/react-query";
+import Spinner from "../components/stateless/Spinner";
 
 export default function EditPost() {
   const { user } = useAuth0();
@@ -19,6 +21,24 @@ export default function EditPost() {
   const [previewState, setPreviewState] = useState(false);
   const btnref = useRef<HTMLButtonElement | null>(null);
   const [postDescription, setPostDescription] = useState("");
+
+  const getpost = async () => {
+    const { data: Post } = await supabase
+      .from("Posts")
+      .select("*")
+      .eq("id", params.id);
+    if (!Post) return;
+    return Post;
+  };
+
+  const { data: Post, isLoading } = useQuery(
+    ["edit_post", params.id],
+    getpost,
+    {
+      refetchOnWindowFocus: false,
+    },
+  );
+
   const censoredWords = [
     "fuck",
     "bitch",
@@ -84,24 +104,16 @@ export default function EditPost() {
     navigate(-1);
   }
 
-  const getpost = useCallback(async () => {
-    const { data: Post } = await supabase
-      .from("Posts")
-      .select("*")
-      .eq("id", params.id);
-    if (!Post) return;
-    if (ref.current) {
+  useEffect(() => {
+    if (Post) {
       ref.current.value = Post[0].postTitle;
-    }
-    if (textAreaRef.current) {
-      textAreaRef.current.value = Post[0].postDescription;
       setPostDescription(Post[0].postDescription);
     }
-  }, [params.id]);
+  }, [Post]);
 
-  useEffect(() => {
-    getpost();
-  }, [getpost]);
+  if (isLoading) {
+    return <Spinner info="Just a sec..." />;
+  }
 
   return (
     <div className="font-medium">

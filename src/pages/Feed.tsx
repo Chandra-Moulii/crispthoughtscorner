@@ -19,8 +19,7 @@ export default function Feed() {
     isLoading,
     error,
   } = useQuery(["allPosts", page], fetchAllPosts, {
-    refetchOnWindowFocus: false,
-    refetchInterval: 50000,
+    refetchInterval: 5000,
   });
 
   async function fetchAllPosts() {
