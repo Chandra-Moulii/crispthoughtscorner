@@ -14,7 +14,7 @@ export default function ImageDecoy(props: propsType) {
   useLayoutEffect(() => {
     const imgComponent = (
       <button
-        className="my-2 rounded-sm outline-none ring-skin-color/50 ring-offset-1 ring-offset-skin-background focus-visible:ring"
+        className="my-2 rounded-sm outline-none ring-skin-color/50 ring-offset-1 ring-offset-skin-background focus-visible:ring sm:pointer-events-none md:pointer-events-auto lg:pointer-events-auto"
         onClick={fn}
       >
         <img
