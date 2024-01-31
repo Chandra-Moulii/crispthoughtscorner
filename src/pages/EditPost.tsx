@@ -1,7 +1,7 @@
 import DOMPurify from "dompurify";
 import Markdown from "markdown-to-jsx";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "../assets/markdown.css";
@@ -106,7 +106,9 @@ export default function EditPost() {
 
   useEffect(() => {
     if (Post) {
-      ref.current.value = Post[0].postTitle;
+      if (ref.current) {
+        ref.current.value = Post[0].postTitle;
+      }
       setPostDescription(Post[0].postDescription);
     }
   }, [Post]);
