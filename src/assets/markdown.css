@@ -90,7 +90,7 @@
 }
 
 .tw-none img {
-  @apply my-3 h-52 w-fit rounded bg-skin-color/10 object-cover;
+  @apply my-3 w-full h-auto max-w-lg rounded bg-skin-color/10 object-cover;
 }
 
 .tw-none input[type="checkbox"] {

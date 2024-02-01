@@ -1,7 +1,7 @@
 import { toast } from "sonner";
 import Markdown from "markdown-to-jsx";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 
@@ -10,7 +10,6 @@ import supabase from "../supabase";
 import Header from "../components/stateless/Header";
 import ErrorPage from "../components/stateless/Error";
 import useDarkMode from "../customHooks/useDarkmode";
-import { openDialog, closeDialog } from "../utils/HandleDialogs";
 import ImageDecoy from "../components/stateless/ImageDecoy";
 import Spinner from "../components/stateless/Spinner";
 import ToastMessage from "../components/stateless/Toast";
@@ -23,9 +22,6 @@ export default function Post() {
     isLoading: loading,
     loginWithRedirect,
   } = useAuth0();
-  const [alt, setAlt] = useState("");
-  const [imageSrc, setImageSrc] = useState("");
-  const dialogref = useRef<HTMLDialogElement | null>(null);
   const [moveToTopButtonVisible, setMoveToTopButtonStatus] = useState(false);
 
   const { data, isLoading, error } = useQuery(["post", id], fetchPost, {
@@ -40,14 +36,6 @@ export default function Post() {
       .eq("id", id);
     if (error) throw error;
     return data[0];
-  }
-
-  function openImagePreview(event: MouseEvent) {
-    const target = (event.target as HTMLImageElement)
-      .firstChild as HTMLImageElement;
-    openDialog(dialogref);
-    setImageSrc(target?.src);
-    setAlt(target?.title);
   }
 
   function copy(text: string, info: string) {
@@ -157,9 +145,7 @@ export default function Post() {
               options={{
                 overrides: {
                   img: {
-                    component: (props) => (
-                      <ImageDecoy {...props} fn={openImagePreview} />
-                    ),
+                    component: (props) => <ImageDecoy {...props} />,
                   },
                   a: {
                     component: (props) => <a {...props} target="_blank"></a>,
@@ -173,31 +159,6 @@ export default function Post() {
           </section>
         </>
       )}
-
-      <dialog
-        data-state="closed"
-        ref={dialogref}
-        className="max-w-2xl border-0 bg-skin-background text-left text-skin-color outline-none backdrop:bg-black/85 md:animate-pop"
-      >
-        <div
-          data-title={alt}
-          className="after:from-black-500 relative max-w-3xl select-none after:absolute after:top-0 after:h-16 after:w-full after:bg-gradient-to-b after:from-black/70 after:to-transparent after:px-3 after:py-2 after:font-medium after:text-white/80 after:md:text-lg md:after:content-[attr(data-title)]"
-        >
-          <button
-            autoFocus
-            onClick={() => closeDialog(dialogref)}
-            className="full absolute right-2 top-2 z-30 rounded-sm outline-none ring-white/50 focus:ring-2"
-          >
-            <svg
-              viewBox="0 -960 960 960"
-              className="aspect-square w-5 fill-white/60"
-            >
-              <path d="m251.333-204.667-46.666-46.666L433.334-480 204.667-708.667l46.666-46.666L480-526.666l228.667-228.667 46.666 46.666L526.666-480l228.667 228.667-46.666 46.666L480-433.334 251.333-204.667Z" />
-            </svg>
-          </button>
-          <img src={imageSrc} draggable={false} />
-        </div>
-      </dialog>
     </div>
   );
 }
