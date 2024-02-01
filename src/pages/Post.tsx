@@ -167,7 +167,7 @@ const MoveToTopButton = () => {
   return (
     <div className="fixed bottom-5 left-1/2 my-2 -translate-x-1/2 rounded-full bg-skin-color">
       <button
-        className="rounded-full p-1 font-semibold text-skin-accent outline-none ring-skin-accent ring-offset-2 ring-offset-skin-background focus-visible:ring-2"
+        className="rounded-full p-1 outline-none ring-skin-accent ring-offset-2 ring-offset-skin-background focus-visible:ring-2"
         onClick={() => (document.documentElement.scrollTop = 0)}
       >
         <svg

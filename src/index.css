@@ -20,6 +20,10 @@
   font-family: "Open Sans", sans-serif;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 ::-webkit-scrollbar {
   @apply w-[6px] appearance-none bg-skin-background;
 }
