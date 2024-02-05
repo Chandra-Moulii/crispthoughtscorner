@@ -94,7 +94,7 @@ export default function NewPost() {
   }, []);
 
   return (
-    <div className="font-medium">
+    <div className="px-4 font-medium">
       <Header title="New Post" fn={close} />
       <form onSubmit={addPost} className="my-2">
         <label htmlFor="postTitle" className="text-sm text-skin-color/60">

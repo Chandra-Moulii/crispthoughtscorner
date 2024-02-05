@@ -49,7 +49,7 @@ export default function AuthorPosts() {
     );
 
   return (
-    <div>
+    <div className="px-4">
       <Header title={`@${username}'s posts`} />
       <input
         type="search"

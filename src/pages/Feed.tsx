@@ -43,7 +43,7 @@ export default function Feed() {
   }
 
   return (
-    <div>
+    <div className="px-4">
       <ToastMessage />
       <header className="flex items-center justify-between py-3">
         <a

@@ -5,7 +5,7 @@ function NotFound() {
   useDarkMode();
 
   return (
-    <div className="text-center">
+    <div className="text-center px-4">
       <h1 className="py-6 text-xl font-medium">404 Page Not found!</h1>
       <LinkButton name="Home" to="/home" />
     </div>

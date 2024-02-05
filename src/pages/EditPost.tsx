@@ -118,7 +118,7 @@ export default function EditPost() {
   }
 
   return (
-    <div className="font-medium">
+    <div className="font-medium px-4">
       <Header title="Edit Post" />
       <form onSubmit={editPost} className="my-2">
         <label htmlFor="postTitle" className="text-sm text-skin-color/60">

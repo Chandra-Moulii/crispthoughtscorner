@@ -74,7 +74,7 @@ export default function Posts() {
   }
 
   return (
-    <div>
+    <div className="px-4">
       <ToastMessage />
       <Header title={`Your posts (${data?.length})`} />
       <section className="my-1 flex flex-wrap items-center gap-2">

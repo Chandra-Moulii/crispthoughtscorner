@@ -1,7 +1,7 @@
 import { toast } from "sonner";
 import Markdown from "markdown-to-jsx";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 
@@ -22,6 +22,7 @@ export default function Post() {
     isLoading: loading,
     loginWithRedirect,
   } = useAuth0();
+  const progressBarRef = useRef<HTMLDivElement>(null);
   const [moveToTopButtonVisible, setMoveToTopButtonStatus] = useState(false);
 
   const { data, isLoading, error } = useQuery(["post", id], fetchPost, {
@@ -38,6 +39,17 @@ export default function Post() {
     return data[0];
   }
 
+  function handleScroll() {
+    const total_height = document.documentElement.scrollHeight;
+    const currscroll_position = window.scrollY;
+    const per_scrolled = Math.floor(
+      (currscroll_position / (total_height - window.innerHeight)) * 100,
+    );
+    if (progressBarRef.current) {
+      progressBarRef.current.style.width = `${per_scrolled}%`;
+    }
+  }
+
   function copy(text: string, info: string) {
     toast.success(info);
     navigator.clipboard.writeText(text);
@@ -45,13 +57,17 @@ export default function Post() {
   useDarkMode();
 
   useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
     function findScrolledDistance() {
       // !!! Please throttle this
       const scrolledHeight = Math.round(window.scrollY);
       setMoveToTopButtonStatus(scrolledHeight > 150);
     }
     document.addEventListener("scroll", findScrolledDistance);
-    return () => document.removeEventListener("scroll", findScrolledDistance);
+    return () => {
+      document.removeEventListener("scroll", findScrolledDistance);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   if (error)
@@ -60,7 +76,11 @@ export default function Post() {
     );
 
   return (
-    <div>
+    <div className="relative px-4">
+      <div
+        ref={progressBarRef}
+        className="fixed left-0 top-0 z-20 h-[6px] w-0 bg-gradient-to-r from-indigo-800 via-purple-800 to-pink-800 text-center text-sm"
+      ></div>
       {!isAuthenticated && !loading ? (
         <div className="sticky top-0 z-10 bg-skin-background bg-skin-background/90">
           <div className="flex flex-wrap items-center justify-between gap-3 py-4">

@@ -32,7 +32,7 @@ export default function Settings() {
   }, [theme]);
 
   return (
-    <div>
+    <div className="px-4">
       <ToastMessage />
       <Header title="Settings" />
       <div className="group relative my-2 w-fit select-none">

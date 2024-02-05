@@ -73,7 +73,7 @@ export default function LandingPage() {
   if (isLoading) return <Spinner info="Authenticating..." />;
 
   return (
-    <div className="pt-7">
+    <div className="pt-7 px-4">
       <h1 className="text-3xl font-extrabold leading-snug [text-wrap:balance] md:text-4xl md:leading-snug">
         CrispThoughtsCorner :&nbsp;
         <span className="text-skin-color">
