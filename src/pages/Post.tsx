@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 
-import { jsPDF } from "jspdf";
 import "../assets/markdown.css";
 import supabase from "../supabase";
 import Header from "../components/stateless/Header";
