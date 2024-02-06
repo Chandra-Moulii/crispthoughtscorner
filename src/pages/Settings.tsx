@@ -63,7 +63,7 @@ export default function Settings() {
               id="theme-light"
               onChange={() => changeTheme("light")}
               checked={theme === "light"}
-              className="relative grid aspect-square w-4 appearance-none place-items-center rounded-full border-2 border-skin-color outline-none before:absolute before:hidden before:aspect-square before:w-2 before:rounded-full before:bg-skin-color checked:before:block focus-visible:ring"
+              className="relative grid aspect-square w-4 appearance-none place-items-center rounded-full border-2 border-skin-color/80 outline-none before:absolute before:hidden before:aspect-square before:w-2 before:rounded-full before:bg-skin-color/80 checked:before:block focus-visible:ring"
             />
             <label htmlFor="theme-light">Light</label>
           </div>
@@ -74,7 +74,7 @@ export default function Settings() {
               id="theme-dark"
               onChange={() => changeTheme("dark")}
               checked={theme === "dark"}
-              className="relative grid aspect-square w-4 appearance-none place-items-center rounded-full border-2 border-skin-color outline-none before:absolute before:hidden before:aspect-square before:w-2 before:rounded-full before:bg-skin-color checked:before:block focus-visible:ring"
+              className="relative grid aspect-square w-4 appearance-none place-items-center rounded-full border-2 border-skin-color/80 outline-none before:absolute before:hidden before:aspect-square before:w-2 before:rounded-full before:bg-skin-color/80 checked:before:block focus-visible:ring"
             />
             <label htmlFor="theme-dark">Dark</label>
           </div>
@@ -85,7 +85,7 @@ export default function Settings() {
               id="theme-system"
               onChange={() => changeTheme("system")}
               checked={theme === "system"}
-              className="relative grid aspect-square w-4 appearance-none place-items-center rounded-full border-2 border-skin-color outline-none before:absolute before:hidden before:aspect-square before:w-2 before:rounded-full before:bg-skin-color checked:before:block focus-visible:ring"
+              className="relative grid aspect-square w-4 appearance-none place-items-center rounded-full border-2 border-skin-color/80 outline-none before:absolute before:hidden before:aspect-square before:w-2 before:rounded-full before:bg-skin-color/80 checked:before:block focus-visible:ring"
             />
             <label htmlFor="theme-system">System</label>
           </div>

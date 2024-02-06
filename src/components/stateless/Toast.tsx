@@ -14,6 +14,7 @@ export default function ToastMessage() {
     <Toaster
       richColors
       closeButton
+      duration={10000}
       theme={theme}
       position="bottom-right"
       toastOptions={{ classNames: { toast: "!p-3" } }}

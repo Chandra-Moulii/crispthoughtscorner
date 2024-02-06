@@ -15,6 +15,7 @@ import Spinner from "../components/stateless/Spinner";
 import ToastMessage from "../components/stateless/Toast";
 
 export default function Post() {
+  const [menuState, setMenuState] = useState(false);
   const { id } = useParams();
   const {
     user,
@@ -51,12 +52,14 @@ export default function Post() {
   }
 
   function downloadOfflinePdf() {
+    setMenuState(false);
     window.print();
   }
 
   function copy(text: string, info: string) {
     toast.success(info);
     navigator.clipboard.writeText(text);
+    setMenuState(false);
   }
   useDarkMode();
 
@@ -139,48 +142,66 @@ export default function Post() {
             )}
           </p>
 
+          {/* Dropdown */}
+          <ToastMessage />
+          <div className="menu relative mt-3 inline-block select-none text-skin-color">
+            <div>
+              <button
+                type="button"
+                onClick={() => setMenuState((prev) => !prev)}
+                className="flex items-center gap-1 rounded-md border-2 border-skin-color/20 px-2 py-1 text-sm font-medium outline-none ring-skin-color/20 focus-visible:ring-2"
+                id="menu-button"
+                aria-expanded="true"
+                aria-haspopup="true"
+              >
+                Options
+                <svg
+                  className="aspect-square w-5 fill-skin-color/60"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" />
+                </svg>
+              </button>
+            </div>
+
+            {menuState && (
+              <div
+                className="absolute left-0 z-20 mt-2 w-48 origin-top-right rounded-md border-2 border-skin-color/10 bg-skin-background p-[2px] text-sm font-medium ring-opacity-5 focus:outline-none"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="menu-button"
+              >
+                <button
+                  className="block w-full rounded p-2 px-3 text-left outline-none ring-inset hover:bg-skin-color/10 focus-visible:ring-2"
+                  onClick={() => copy(window.location.href, "Post Link copied")}
+                >
+                  <p>Copy Link</p>
+                </button>
+                <button
+                  className="block w-full rounded p-2 px-3 text-left outline-none ring-inset hover:bg-skin-color/10 focus-visible:ring-2"
+                  onClick={() => copy(data.postDescription, "Markdown copied")}
+                >
+                  <p>Copy Markdown</p>
+                </button>
+                <button
+                  className="block w-full rounded p-2 px-3 text-left outline-none ring-inset hover:bg-skin-color/10 focus-visible:ring-2"
+                  onClick={downloadOfflinePdf}
+                >
+                  <p>Download post</p>
+                </button>
+              </div>
+            )}
+          </div>
+
           <p className="printable hidden">
             Live Preview -&nbsp;
             <a className="text-skin-accent" href={window.location.href}>
               {window.location.href}
             </a>
           </p>
-          <section className="not-printable mb-2 mt-1 flex gap-2">
-            <span>
-              <button
-                className="group rounded-sm p-[2.5px] opacity-80 outline-none hover:opacity-100 focus-visible:opacity-100"
-                onClick={() => copy(window.location.href, "Post Link copied")}
-              >
-                <p className="text-xs underline underline-offset-2">
-                  Copy Link
-                </p>
-              </button>
-            </span>
-            <span>
-              <ToastMessage />
-              <button
-                className="group rounded-sm p-[2.5px] opacity-80 outline-none hover:opacity-100 focus-visible:opacity-100"
-                onClick={() => copy(data.postDescription, "Markdown copied")}
-              >
-                <p className="text-xs underline underline-offset-2">
-                  Copy Markdown
-                </p>
-              </button>
-            </span>
-            <span>
-              <button
-                className="group rounded-sm p-[2.5px] opacity-80 outline-none hover:opacity-100 focus-visible:opacity-100"
-                onClick={downloadOfflinePdf}
-              >
-                <p className="text-xs underline underline-offset-2">
-                  Download post
-                </p>
-              </button>
-            </span>
-          </section>
 
           <hr className="border-1 my-3 border-skin-color/20" />
-          <section className="tw-none relative pb-20 text-sm">
+          <article className="tw-none relative pb-20 text-sm">
             <Markdown
               options={{
                 overrides: {
@@ -196,7 +217,7 @@ export default function Post() {
               {data?.postDescription ?? ""}
             </Markdown>
             {moveToTopButtonVisible && <MoveToTopButton />}
-          </section>
+          </article>
         </>
       )}
     </div>

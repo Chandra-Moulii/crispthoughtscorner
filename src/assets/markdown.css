@@ -102,11 +102,16 @@
     display: block;
     padding-top: 2rem;
   }
-  .not-printable {
+  .not-printable,
+  .menu,
+  section {
     display: none;
   }
   hr {
     visibility: hidden;
     margin: 2rem 0;
+  }
+  body {
+    -webkit-print-color-adjust: exact;
   }
 }
