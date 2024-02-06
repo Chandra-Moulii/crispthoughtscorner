@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -38,6 +38,7 @@ export default function Feed() {
       post.postTitle.toLowerCase().includes(searchValue.toLowerCase()),
     );
   }
+
   if (error !== null && !isLoading) {
     toast.error("Oops! Somthing went wrong. Try again later");
   }

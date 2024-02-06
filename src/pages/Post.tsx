@@ -51,19 +51,48 @@ export default function Post() {
     }
   }
 
+  function handleCtrlKeyPress(event: KeyboardEvent) {
+    if (event.ctrlKey) {
+      const pressedKey = event.key.toUpperCase();
+      switch (pressedKey) {
+        case "L":
+          event.preventDefault();
+          copyLink();
+          break;
+        case "D":
+          event.preventDefault();
+          downloadOfflinePdf();
+          break;
+        case "M":
+          event.preventDefault();
+          copyMarkDown(data.postDescription);
+          break;
+        default:
+          break;
+      }
+    }
+  }
+
   function downloadOfflinePdf() {
     setMenuState(false);
     window.print();
   }
 
-  function copy(text: string, info: string) {
-    toast.success(info);
-    navigator.clipboard.writeText(text);
+  function copyLink() {
+    toast.success("Post Link copied to clipboard successfully");
+    navigator.clipboard.writeText(window.location.href);
+    setMenuState(false);
+  }
+
+  function copyMarkDown(markdown: string) {
+    toast.success("Markdown copied to clipboard successfully");
+    navigator.clipboard.writeText(markdown);
     setMenuState(false);
   }
   useDarkMode();
 
   useEffect(() => {
+    window.addEventListener("keydown", handleCtrlKeyPress);
     window.addEventListener("scroll", handleScroll);
     function findScrolledDistance() {
       // !!! Please throttle this
@@ -74,8 +103,9 @@ export default function Post() {
     return () => {
       document.removeEventListener("scroll", findScrolledDistance);
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("keydown", handleCtrlKeyPress);
     };
-  }, []);
+  });
 
   if (error)
     return (
@@ -166,28 +196,31 @@ export default function Post() {
 
             {menuState && (
               <div
-                className="absolute left-0 z-20 mt-2 w-48 origin-top-right animate-pop rounded-md border-2 border-skin-color/10 bg-skin-background p-[2px] text-sm font-medium ring-opacity-5 focus:outline-none"
+                className="absolute left-0 z-20 mt-2 w-52 origin-top-right animate-pop rounded-md border-2 border-skin-color/10 bg-skin-background p-[2px] py-1 text-sm font-medium ring-opacity-5 focus:outline-none"
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="menu-button"
               >
                 <button
-                  className="block w-full rounded p-2 px-3 text-left outline-none ring-inset hover:bg-skin-color/10 focus-visible:ring-2"
-                  onClick={() => copy(window.location.href, "Post Link copied")}
+                  className="flex w-full items-center justify-between rounded p-2 px-3 text-left outline-none ring-inset hover:bg-skin-color/10 focus-visible:ring-2"
+                  onClick={copyLink}
                 >
                   <p>Copy Link</p>
+                  <p className="text-xs text-skin-color/40">Ctrl+L</p>
                 </button>
                 <button
-                  className="block w-full rounded p-2 px-3 text-left outline-none ring-inset hover:bg-skin-color/10 focus-visible:ring-2"
-                  onClick={() => copy(data.postDescription, "Markdown copied")}
+                  className="flex w-full items-center justify-between rounded p-2 px-3 text-left outline-none ring-inset hover:bg-skin-color/10 focus-visible:ring-2"
+                  onClick={() => copyMarkDown(data.postDescription)}
                 >
                   <p>Copy Markdown</p>
+                  <p className="text-xs text-skin-color/40">Ctrl+M</p>
                 </button>
                 <button
-                  className="block w-full rounded p-2 px-3 text-left outline-none ring-inset hover:bg-skin-color/10 focus-visible:ring-2"
+                  className="flex w-full items-center justify-between rounded p-2 px-3 text-left outline-none ring-inset hover:bg-skin-color/10 focus-visible:ring-2"
                   onClick={downloadOfflinePdf}
                 >
                   <p>Download post</p>
+                  <p className="text-xs text-skin-color/40">Ctrl+D</p>
                 </button>
               </div>
             )}
