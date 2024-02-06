@@ -206,21 +206,27 @@ export default function Post() {
                   onClick={copyLink}
                 >
                   <p>Copy Link</p>
-                  <p className="text-xs text-skin-color/40">Ctrl+L</p>
+                  <p className="hidden text-xs text-skin-color/40 md:inline-block lg:inline-block">
+                    Ctrl+L
+                  </p>
                 </button>
                 <button
                   className="flex w-full items-center justify-between rounded p-2 px-3 text-left outline-none ring-inset hover:bg-skin-color/10 focus-visible:ring-2"
                   onClick={() => copyMarkDown(data.postDescription)}
                 >
                   <p>Copy Markdown</p>
-                  <p className="text-xs text-skin-color/40">Ctrl+M</p>
+                  <p className="hidden text-xs text-skin-color/40 md:inline-block lg:inline-block">
+                    Ctrl+M
+                  </p>
                 </button>
                 <button
                   className="flex w-full items-center justify-between rounded p-2 px-3 text-left outline-none ring-inset hover:bg-skin-color/10 focus-visible:ring-2"
                   onClick={downloadOfflinePdf}
                 >
                   <p>Download post</p>
-                  <p className="text-xs text-skin-color/40">Ctrl+D</p>
+                  <p className="hidden text-xs text-skin-color/40 md:inline-block lg:inline-block">
+                    Ctrl+D
+                  </p>
                 </button>
               </div>
             )}
