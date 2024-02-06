@@ -166,7 +166,7 @@ export default function Post() {
 
             {menuState && (
               <div
-                className="absolute left-0 z-20 mt-2 w-48 origin-top-right rounded-md border-2 border-skin-color/10 bg-skin-background p-[2px] text-sm font-medium ring-opacity-5 focus:outline-none"
+                className="absolute left-0 z-20 mt-2 w-48 origin-top-right animate-pop rounded-md border-2 border-skin-color/10 bg-skin-background p-[2px] text-sm font-medium ring-opacity-5 focus:outline-none"
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="menu-button"
