@@ -3,9 +3,10 @@ import { useLayoutEffect, useState } from "react";
 
 import Header from "../components/stateless/Header";
 import ToastMessage from "../components/stateless/Toast";
+import { getDeviceTheme } from "../customHooks/useDarkmode";
 
 export default function Settings() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("");
 
   const { logout: logoutWithRedirect, user } = useAuth0();
 
@@ -13,21 +14,27 @@ export default function Settings() {
     logoutWithRedirect();
   }
 
-  function changeTheme() {
-    if (theme === "dark") document.documentElement.classList.add("dark");
+  function changeTheme(theme: string) {
+    if (theme === "system") {
+      document.documentElement.classList.add(getDeviceTheme());
+    } else if (theme === "dark") document.documentElement.classList.add("dark");
     else document.documentElement.classList.remove("dark");
-    setTheme((prev) => {
-      localStorage.setItem("theme", prev === "light" ? "dark" : "light");
-      return prev === "light" ? "dark" : "light";
+    setTheme(() => {
+      localStorage.setItem("theme", theme);
+      return theme;
     });
   }
 
   useLayoutEffect(() => {
     document.title = "CrispThoughtsCorner - Settings";
     const theme = localStorage.getItem("theme");
-    if (!theme) localStorage.setItem("theme", "light");
-    else setTheme(theme);
-    if (theme === "dark") document.documentElement.classList.add("dark");
+    if (!theme) {
+      localStorage.setItem("theme", "system");
+      setTheme("system");
+    } else setTheme(theme);
+    if (theme === "system") {
+      document.documentElement.classList.add(getDeviceTheme());
+    } else if (theme === "dark") document.documentElement.classList.add("dark");
     else document.documentElement.classList.remove("dark");
   }, [theme]);
 
@@ -45,15 +52,44 @@ export default function Settings() {
           {user?.email}
         </span>
       </div>
-      <div className="my-4 flex select-none items-center gap-2">
-        <input
-          type="checkbox"
-          id="darkmode"
-          onChange={changeTheme}
-          checked={theme === "dark"}
-          className="relative h-5 w-9 cursor-pointer appearance-none rounded-full bg-skin-color/20 p-1 outline-none ring-skin-accent/60 before:block before:aspect-square before:w-[14px] before:-translate-y-[1.2px] before:rounded-full before:bg-white before:transition-transform checked:bg-skin-accent checked:before:translate-x-[14.5px] focus-visible:ring"
-        />
-        <label htmlFor="darkmode">Dark Mode</label>
+
+      <div className="my-3">
+        <p className="font-bold">Theme</p>
+        <div className="mt-2 flex flex-col gap-1">
+          <div className="flex items-center gap-2">
+            <input
+              type="radio"
+              name="theme"
+              id="theme-light"
+              onChange={() => changeTheme("light")}
+              checked={theme === "light"}
+              className="relative grid aspect-square w-4 appearance-none place-items-center rounded-full border-2 border-skin-color outline-none before:absolute before:hidden before:aspect-square before:w-2 before:rounded-full before:bg-skin-color checked:before:block focus-visible:ring"
+            />
+            <label htmlFor="theme-light">Light</label>
+          </div>
+          <div className="flex items-center gap-2">
+            <input
+              type="radio"
+              name="theme"
+              id="theme-dark"
+              onChange={() => changeTheme("dark")}
+              checked={theme === "dark"}
+              className="relative grid aspect-square w-4 appearance-none place-items-center rounded-full border-2 border-skin-color outline-none before:absolute before:hidden before:aspect-square before:w-2 before:rounded-full before:bg-skin-color checked:before:block focus-visible:ring"
+            />
+            <label htmlFor="theme-dark">Dark</label>
+          </div>
+          <div className="flex items-center gap-2">
+            <input
+              type="radio"
+              name="theme"
+              id="theme-system"
+              onChange={() => changeTheme("system")}
+              checked={theme === "system"}
+              className="relative grid aspect-square w-4 appearance-none place-items-center rounded-full border-2 border-skin-color outline-none before:absolute before:hidden before:aspect-square before:w-2 before:rounded-full before:bg-skin-color checked:before:block focus-visible:ring"
+            />
+            <label htmlFor="theme-system">System</label>
+          </div>
+        </div>
       </div>
       <section className="my-5 flex gap-2">
         <button

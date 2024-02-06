@@ -67,7 +67,7 @@ export default function Feed() {
 
       <section className="my-1 flex flex-wrap items-center gap-2">
         <LinkButton name="New Post" to="/newpost" />
-        <LinkButton name="Your Posts" to="/posts" />
+        <LinkButton name="Your Posts" to="/yourposts" />
         <input
           type="search"
           maxLength={100}

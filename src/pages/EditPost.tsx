@@ -118,7 +118,7 @@ export default function EditPost() {
   }
 
   return (
-    <div className="font-medium px-4">
+    <div className="px-4 font-medium">
       <Header title="Edit Post" />
       <form onSubmit={editPost} className="my-2">
         <label htmlFor="postTitle" className="text-sm text-skin-color/60">
@@ -204,7 +204,7 @@ export default function EditPost() {
             ref={btnref}
             className="rounded-sm bg-skin-accent px-3 py-1 text-white outline-none ring-skin-accent/60 hover:bg-skin-accent/80 focus-visible:ring disabled:opacity-50 disabled:hover:border-skin-color/10"
           >
-            Confirm
+            Post
           </button>
         </div>
       </form>

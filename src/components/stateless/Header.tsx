@@ -20,7 +20,7 @@ export default function Header(props: headerPropsType) {
       >
         <svg
           viewBox="0 -960 960 960"
-          className="aspect-square w-5 fill-skin-color"
+          className="aspect-square w-6 fill-skin-color"
         >
           <path d="m275.845-454.873 239.744 239.488L480-180.001 180.001-480 480-779.999l35.589 35.384-239.744 239.488h504.154v50.254H275.845Z" />
         </svg>
