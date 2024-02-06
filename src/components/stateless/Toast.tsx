@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import { Toaster } from "sonner";
 
-type theme = "light" | "dark";
+type theme = "light" | "dark" | "system";
 
 export default function ToastMessage() {
-  const [theme, setTheme] = useState<theme>("light");
+  const [theme, setTheme] = useState<theme>("system");
   useEffect(() => {
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme === "light" || storedTheme === "dark") {
-      setTheme(storedTheme);
-    }
+    const storedTheme: theme = localStorage.getItem("theme") as theme;
+    if (!storedTheme) return;
+    setTheme(storedTheme);
   }, []);
   return (
     <Toaster
@@ -17,11 +16,7 @@ export default function ToastMessage() {
       closeButton
       theme={theme}
       position="bottom-right"
-      toastOptions={{
-        classNames: {
-          toast: "!p-3 !-my-1",
-        },
-      }}
+      toastOptions={{ classNames: { toast: "!p-3" } }}
     />
   );
 }

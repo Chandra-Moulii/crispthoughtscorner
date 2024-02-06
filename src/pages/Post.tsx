@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 
+import { jsPDF } from "jspdf";
 import "../assets/markdown.css";
 import supabase from "../supabase";
 import Header from "../components/stateless/Header";
@@ -50,6 +51,10 @@ export default function Post() {
     }
   }
 
+  function downloadOfflinePdf() {
+    window.print();
+  }
+
   function copy(text: string, info: string) {
     toast.success(info);
     navigator.clipboard.writeText(text);
@@ -76,7 +81,7 @@ export default function Post() {
     );
 
   return (
-    <div className="relative px-4">
+    <div className="printable relative px-4">
       <div
         ref={progressBarRef}
         className="fixed left-0 top-0 z-20 h-[6px] w-0 bg-gradient-to-r from-indigo-800 via-purple-800 to-pink-800 text-center text-sm"
@@ -110,8 +115,8 @@ export default function Post() {
         <Spinner info="Just a sec" />
       ) : (
         <>
-          <h1 className="my-1 mb-2 text-2xl font-bold">{data?.postTitle}</h1>
-          <p className="text-sm">
+          <h1 className="my-1 mb-2 text-2xl font-black">{data?.postTitle}</h1>
+          <p className="not-printable text-sm">
             {`Created at ${new Date(data?.createdAt ?? "")
               .toLocaleString()
               .toLowerCase()} by `}
@@ -135,7 +140,13 @@ export default function Post() {
             )}
           </p>
 
-          <section className="mb-2 mt-1 flex gap-2">
+          <p className="printable hidden">
+            Live Preview -&nbsp;
+            <a className="text-skin-accent" href={window.location.href}>
+              {window.location.href}
+            </a>
+          </p>
+          <section className="not-printable mb-2 mt-1 flex gap-2">
             <span>
               <button
                 className="group rounded-sm p-[2.5px] opacity-80 outline-none hover:opacity-100 focus-visible:opacity-100"
@@ -154,6 +165,16 @@ export default function Post() {
               >
                 <p className="text-xs underline underline-offset-2">
                   Copy Markdown
+                </p>
+              </button>
+            </span>
+            <span>
+              <button
+                className="group rounded-sm p-[2.5px] opacity-80 outline-none hover:opacity-100 focus-visible:opacity-100"
+                onClick={downloadOfflinePdf}
+              >
+                <p className="text-xs underline underline-offset-2">
+                  Download post
                 </p>
               </button>
             </span>

@@ -55,7 +55,7 @@ export default function Settings() {
 
       <div className="my-3">
         <p className="font-bold">Theme</p>
-        <div className="mt-2 flex flex-col gap-1">
+        <div className="mt-2 flex flex-col gap-2 text-sm">
           <div className="flex items-center gap-2">
             <input
               type="radio"

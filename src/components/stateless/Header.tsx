@@ -13,7 +13,7 @@ export default function Header(props: headerPropsType) {
   }
 
   return (
-    <header className="flex items-center gap-4 py-3">
+    <header className="flex items-center gap-4 py-3 not-printable">
       <button
         onClick={goBack}
         className="rounded-sm outline-none ring-skin-color/30 focus-visible:ring"
