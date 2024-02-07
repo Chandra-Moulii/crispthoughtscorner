@@ -73,8 +73,8 @@ export default function LandingPage() {
   if (isLoading) return <Spinner info="Authenticating..." />;
 
   return (
-    <div className="pt-7 px-4">
-      <h1 className="text-3xl font-extrabold leading-snug [text-wrap:balance] md:text-4xl md:leading-snug">
+    <div className="px-4 pt-7">
+      <h1 className="animate-slideDown300 text-3xl font-extrabold leading-snug opacity-0 [text-wrap:balance] md:text-4xl md:leading-snug">
         CrispThoughtsCorner :&nbsp;
         <span className="text-skin-color">
           Where all&nbsp;
@@ -85,7 +85,7 @@ export default function LandingPage() {
           &nbsp; Converge.
         </span>
       </h1>
-      <p className="my-5 font-medium">
+      <p className="animate-slideDown600 my-5 font-medium opacity-0">
         🚀 Open the door to a community driven by shared innovation. At Crisp
         Thoughts Corner, we believe that the journey towards perfection is a
         continuous process, transforming complexity into exceptional results.
@@ -93,7 +93,7 @@ export default function LandingPage() {
       <button
         onClick={login}
         disabled={isLoading}
-        className="flex items-center justify-center gap-2 rounded-sm bg-skin-accent px-3 py-2 font-medium text-white outline-none ring-skin-accent/60 hover:bg-skin-accent/80 focus-visible:ring disabled:bg-skin-accent/60"
+        className="animate-slideDown900 flex items-center justify-center gap-2 rounded-sm bg-skin-accent px-3 py-2 font-medium text-white opacity-0 outline-none ring-skin-accent/60 hover:bg-skin-accent/80 focus-visible:ring disabled:bg-skin-accent/60"
       >
         Continue with Auth0
       </button>
