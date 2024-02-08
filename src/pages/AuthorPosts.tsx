@@ -7,6 +7,7 @@ import ErrorPage from "../components/stateless/Error";
 import Header from "../components/stateless/Header";
 import Spinner from "../components/stateless/Spinner";
 import Pagination from "../components/stateless/Pagination";
+import { toast } from "sonner";
 
 export default function AuthorPosts() {
   const ITMESPERPAGE = 15;
@@ -48,6 +49,10 @@ export default function AuthorPosts() {
       <ErrorPage info="Hmm...this user doesn’t exist. Try searching for someone else." />
     );
 
+  if (error !== null && !isLoading) {
+    toast.error("Oops! Somthing went wrong. Try again later");
+  }
+
   return (
     <div className="px-4">
       <Header title={`@${username}'s posts`} />
@@ -56,7 +61,7 @@ export default function AuthorPosts() {
         value={searchValue}
         onChange={(event) => setSearchValue(event.target.value)}
         placeholder="Search posts"
-        className="w-full flex-grow rounded-sm border-2 mt-1 border-skin-color/40 bg-skin-background px-2 py-1 outline-none ring-skin-color/30 placeholder:text-skin-color/30 focus:ring-2"
+        className="mt-1 w-full flex-grow rounded-sm border-2 border-skin-color/40 bg-skin-background px-2 py-1 outline-none ring-skin-color/30 placeholder:text-skin-color/30 focus:ring-2"
       />
       <hr className="mt-3 border-skin-color/10" />
 
@@ -73,11 +78,6 @@ export default function AuthorPosts() {
             >
               Clear search
             </button>
-          </p>
-        ) : null}
-        {error !== null && !isLoading ? (
-          <p className="text-skin-error">
-            Something went wrong please refresh the page
           </p>
         ) : null}
 

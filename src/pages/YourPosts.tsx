@@ -54,10 +54,7 @@ export default function Posts() {
   }
 
   async function clearAllPosts() {
-    await supabase
-      .from("Posts")
-      .delete()
-      .eq("postAuthor", user?.email);
+    await supabase.from("Posts").delete().eq("postAuthor", user?.email);
     closeDialog(dialogref);
 
     queryClient.invalidateQueries({ queryKey: ["userposts", page] });
@@ -111,11 +108,6 @@ export default function Posts() {
             >
               Clear search
             </button>
-          </p>
-        ) : null}
-        {error !== null && !isLoading ? (
-          <p className="text-skin-error">
-            Something went wrong please refresh the page
           </p>
         ) : null}
 
