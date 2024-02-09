@@ -95,7 +95,7 @@ export default function Post() {
     const date = new Date(data?.createdAt).getTime();
     const timeDiff = Date.now() - date;
     const [hours, min, sec] = millisecondsToHMS(timeDiff);
-    if (hours > 24) {
+    if (hours >= 24) {
       return `on ${new Date(data?.createdAt ?? "").toLocaleString().toLowerCase()}`;
     }
     if (hours > 0) {
