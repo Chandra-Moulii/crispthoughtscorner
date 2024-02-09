@@ -52,8 +52,8 @@ export default function Post() {
   }
 
   function handleCtrlKeyPress(event: KeyboardEvent) {
+    const pressedKey = event.key.toUpperCase();
     if (event.ctrlKey) {
-      const pressedKey = event.key.toUpperCase();
       switch (pressedKey) {
         case "L":
           event.preventDefault();
@@ -70,6 +70,9 @@ export default function Post() {
         default:
           break;
       }
+    }
+    if (pressedKey === "ESCAPE") {
+      setMenuState(false);
     }
   }
 
