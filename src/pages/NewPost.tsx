@@ -193,7 +193,8 @@ export default function NewPost() {
           <button
             type="submit"
             ref={btnref}
-            className="rounded-sm bg-skin-accent px-3 py-1 text-white outline-none ring-skin-accent/60 hover:bg-skin-accent/80 focus-visible:ring disabled:opacity-50 disabled:hover:border-skin-color/10"
+            disabled={postTitle.length < 5 || postTitle.length > 150}
+            className="rounded-sm bg-skin-accent px-3 py-1 text-white outline-none ring-skin-accent/60 hover:bg-skin-accent/80 focus-visible:ring disabled:cursor-not-allowed disabled:bg-neutral-700 disabled:text-white/30"
           >
             Post
           </button>

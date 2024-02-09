@@ -75,7 +75,11 @@ export default function EditPost() {
   async function editPost(event: React.FormEvent) {
     event.preventDefault();
     const posTitle = ref.current as HTMLInputElement;
-    if (!posTitle.value.trimStart() || posTitle.value.length < 5) {
+    if (
+      !posTitle.value.trimStart() ||
+      posTitle.value.length < 5 ||
+      posTitle.value.length > 150
+    ) {
       posTitle.focus();
       return;
     }
@@ -134,7 +138,6 @@ export default function EditPost() {
             autoFocus
             ref={ref}
             onChange={(e) => setPostTitle(e.target.value)}
-            maxLength={100}
             placeholder="Give a title to your post"
             className="mt-1 block w-full rounded-sm border-b-2 border-skin-color/40 bg-skin-background py-1 outline-none ring-skin-color/30 placeholder:text-skin-color/40 focus:border-skin-color/70"
           />
@@ -216,7 +219,8 @@ export default function EditPost() {
           <button
             type="submit"
             ref={btnref}
-            className="rounded-sm bg-skin-accent px-3 py-1 text-white outline-none ring-skin-accent/60 hover:bg-skin-accent/80 focus-visible:ring disabled:opacity-50 disabled:hover:border-skin-color/10"
+            disabled={postTitle.length < 5 || postTitle.length > 150}
+            className="rounded-sm bg-skin-accent px-3 py-1 text-white outline-none ring-skin-accent/60 hover:bg-skin-accent/80 focus-visible:ring disabled:cursor-not-allowed disabled:bg-neutral-700 disabled:text-white/30"
           >
             Post
           </button>
