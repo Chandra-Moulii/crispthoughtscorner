@@ -199,6 +199,9 @@ export default function Post() {
                 )}
               </>
             )}
+            {data.postEdited && (
+              <span className="text-skin-color/60">{` - (Edited) `}</span>
+            )}
           </p>
 
           {/* Dropdown */}

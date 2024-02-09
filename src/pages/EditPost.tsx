@@ -91,6 +91,7 @@ export default function EditPost() {
       postTitle: censoredText(posTitle.value.trim()),
       postDescription: censoredText(DOMPurify.sanitize(postDescription.trim())),
       postAuthor: user?.email,
+      postEdited: true,
     };
     const target = btnref.current as HTMLButtonElement;
     target.innerText = "Posting...";
@@ -208,22 +209,27 @@ export default function EditPost() {
           </>
         </>
 
-        <div className="my-3 flex items-center justify-end gap-2">
-          <button
-            type="button"
-            onClick={closeNewPost}
-            className="rounded-sm bg-skin-error px-3 py-1 text-white outline-none ring-skin-error/60 hover:bg-skin-error/80 focus-visible:ring"
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            ref={btnref}
-            disabled={postTitle.length < 5 || postTitle.length > 150}
-            className="rounded-sm bg-skin-accent px-3 py-1 text-white outline-none ring-skin-accent/60 hover:bg-skin-accent/80 focus-visible:ring disabled:cursor-not-allowed disabled:bg-neutral-500 disabled:text-white/50"
-          >
-            Post
-          </button>
+        <div className="my-3 flex flex-wrap items-start justify-between gap-2 gap-y-6">
+          <p className="text-xs text-skin-color/50">
+            * Changes may take a while to appear after editing.
+          </p>
+          <div className="w-ful flex flex-grow justify-end gap-2">
+            <button
+              type="button"
+              onClick={closeNewPost}
+              className="rounded-sm bg-skin-error px-3 py-1 text-white outline-none ring-skin-error/60 hover:bg-skin-error/80 focus-visible:ring"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              ref={btnref}
+              disabled={postTitle.length < 5 || postTitle.length > 150}
+              className="rounded-sm bg-skin-accent px-3 py-1 text-white outline-none ring-skin-accent/60 hover:bg-skin-accent/80 focus-visible:ring disabled:cursor-not-allowed disabled:bg-neutral-500 disabled:text-white/50"
+            >
+              Post
+            </button>
+          </div>
         </div>
       </form>
     </div>
