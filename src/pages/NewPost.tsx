@@ -16,6 +16,7 @@ export default function NewPost() {
   const ref = useRef<HTMLInputElement | null>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [previewState, setPreviewState] = useState(false);
+  const [postTitle, setPostTitle] = useState("");
   const btnref = useRef<HTMLButtonElement | null>(null);
   const [postDescription, setPostDescription] = useState("");
   const dialogref = useRef<HTMLDialogElement | null>(null);
@@ -54,7 +55,11 @@ export default function NewPost() {
   async function addPost(event: React.FormEvent) {
     event.preventDefault();
     const posTitle = ref.current as HTMLInputElement;
-    if (!posTitle.value.trimStart() || posTitle.value.length < 5) {
+    if (
+      !posTitle.value.trimStart() ||
+      posTitle.value.length < 5 ||
+      posTitle.value.length > 150
+    ) {
       posTitle.focus();
       return;
     }
@@ -100,17 +105,27 @@ export default function NewPost() {
         <label htmlFor="postTitle" className="text-sm text-skin-color/60">
           Post Title
         </label>
-        <input
-          data-content="Post Title"
-          type="text"
-          id="postTitle"
-          autoFocus
-          ref={ref}
-          maxLength={100}
-          placeholder="Give a title to your post"
-          className="mt-1 block w-full rounded-sm border-b-2 border-skin-color/40 bg-skin-background py-1 outline-none ring-skin-color/30 placeholder:text-skin-color/40 focus:border-skin-color/70"
-        />
-
+        <div>
+          <input
+            data-content="Post Title"
+            type="text"
+            id="postTitle"
+            autoFocus
+            ref={ref}
+            onChange={(e) => setPostTitle(e.target.value)}
+            placeholder="Give a title to your post"
+            className="mt-1 block w-full rounded-sm border-b-2 border-skin-color/40 bg-skin-background py-1 outline-none ring-skin-color/30 placeholder:text-skin-color/40 focus:border-skin-color/70"
+          />
+        </div>
+        <div className="my-3">
+          <p
+            className={`text-xs ${postTitle.length > 130 && postTitle.length < 150 ? "text-yellow-500" : postTitle.length >= 150 && "text-skin-error"}`}
+          >
+            {postTitle.length > 150
+              ? "Character limit exceeded !!!"
+              : `Used ${postTitle.length} characters of 150`}
+          </p>
+        </div>
         <>
           <header className="mt-3 flex gap-1 text-sm text-skin-color/60">
             <button

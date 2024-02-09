@@ -20,6 +20,7 @@ export default function EditPost() {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [previewState, setPreviewState] = useState(false);
   const btnref = useRef<HTMLButtonElement | null>(null);
+  const [postTitle, setPostTitle] = useState("");
   const [postDescription, setPostDescription] = useState("");
 
   const getpost = async () => {
@@ -107,6 +108,7 @@ export default function EditPost() {
   useEffect(() => {
     if (Post) {
       if (ref.current) {
+        setPostTitle(Post[0].postTitle);
         ref.current.value = Post[0].postTitle;
       }
       setPostDescription(Post[0].postDescription);
@@ -124,16 +126,28 @@ export default function EditPost() {
         <label htmlFor="postTitle" className="text-sm text-skin-color/60">
           Post Title
         </label>
-        <input
-          data-content="Post Title"
-          type="text"
-          id="postTitle"
-          autoFocus
-          ref={ref}
-          maxLength={100}
-          placeholder="Give a title to your post"
-          className="mt-1 block w-full rounded-sm border-b-2 border-skin-color/40 bg-skin-background py-1 outline-none ring-skin-color/30 placeholder:text-skin-color/40 focus:border-skin-color/70"
-        />
+        <div>
+          <input
+            data-content="Post Title"
+            type="text"
+            id="postTitle"
+            autoFocus
+            ref={ref}
+            onChange={(e) => setPostTitle(e.target.value)}
+            maxLength={100}
+            placeholder="Give a title to your post"
+            className="mt-1 block w-full rounded-sm border-b-2 border-skin-color/40 bg-skin-background py-1 outline-none ring-skin-color/30 placeholder:text-skin-color/40 focus:border-skin-color/70"
+          />
+          <div className="my-3">
+            <p
+              className={`text-xs ${postTitle.length > 130 && postTitle.length < 150 ? "text-yellow-500" : postTitle.length >= 150 && "text-skin-error"}`}
+            >
+              {postTitle.length > 150
+                ? "Character limit exceeded !!!"
+                : `Used ${postTitle.length} characters of 150`}
+            </p>
+          </div>
+        </div>
 
         <>
           <header className="mt-3 flex gap-1 text-sm text-skin-color/60">
