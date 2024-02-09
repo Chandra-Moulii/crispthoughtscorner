@@ -117,7 +117,7 @@ export default function NewPost() {
             className="mt-1 block w-full rounded-sm border-b-2 border-skin-color/40 bg-skin-background py-1 outline-none ring-skin-color/30 placeholder:text-skin-color/40 focus:border-skin-color/70"
           />
         </div>
-        <div className="my-3">
+        <div className="my-3 text-skin-color/60">
           <p
             className={`text-xs ${postTitle.length > 130 && postTitle.length < 150 ? "text-yellow-500" : postTitle.length >= 150 && "text-skin-error"}`}
           >
