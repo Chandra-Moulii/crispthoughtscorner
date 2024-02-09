@@ -78,6 +78,32 @@ export default function Post() {
     window.print();
   }
 
+  function millisecondsToHMS(milliseconds: number) {
+    let seconds = milliseconds / 1000;
+    const hours = Math.floor(seconds / 3600);
+    seconds %= 3600;
+    const minutes = Math.floor(seconds / 60);
+    seconds %= 60;
+    return [hours, minutes, Math.floor(seconds)];
+  }
+
+  function getRelativeTime() {
+    const formatter = new Intl.RelativeTimeFormat("en-us");
+    const date = new Date(data?.createdAt).getTime();
+    const timeDiff = Date.now() - date;
+    const [hours, min, sec] = millisecondsToHMS(timeDiff);
+    if (hours > 24) {
+      return `on ${new Date(data?.createdAt ?? "").toLocaleString().toLowerCase()}`;
+    }
+    if (hours > 0) {
+      return formatter.format(-hours, "hours");
+    } else if (min > 0) {
+      return formatter.format(-min, "minutes");
+    } else {
+      return formatter.format(-sec, "seconds");
+    }
+  }
+
   function copyLink() {
     toast.success("Post Link copied to clipboard successfully");
     navigator.clipboard.writeText(window.location.href);
@@ -149,9 +175,7 @@ export default function Post() {
         <>
           <h1 className="my-1 mb-2 text-2xl font-black">{data?.postTitle}</h1>
           <p className="not-printable text-sm">
-            {`Created at ${new Date(data?.createdAt ?? "")
-              .toLocaleString()
-              .toLowerCase()} by `}
+            {`Posted ${getRelativeTime()} by `}
             {data?.postAuthor === user?.email ? (
               <span>you</span>
             ) : (
