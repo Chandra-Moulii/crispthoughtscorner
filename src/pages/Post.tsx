@@ -173,7 +173,9 @@ export default function Post() {
         <Spinner info="Just a sec" />
       ) : (
         <>
-          <h1 className="my-1 mb-2 text-2xl font-black">{data?.postTitle}</h1>
+          <h1 className="my-1 mb-2 break-words text-2xl font-black">
+            {data?.postTitle}
+          </h1>
           <p className="not-printable text-sm">
             {`Posted ${getRelativeTime()} by `}
             {data?.postAuthor === user?.email ? (

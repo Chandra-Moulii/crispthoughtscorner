@@ -220,7 +220,7 @@ export default function EditPost() {
             type="submit"
             ref={btnref}
             disabled={postTitle.length < 5 || postTitle.length > 150}
-            className="rounded-sm bg-skin-accent px-3 py-1 text-white outline-none ring-skin-accent/60 hover:bg-skin-accent/80 focus-visible:ring disabled:cursor-not-allowed disabled:bg-neutral-700 disabled:text-white/30"
+            className="rounded-sm bg-skin-accent px-3 py-1 text-white outline-none ring-skin-accent/60 hover:bg-skin-accent/80 focus-visible:ring disabled:cursor-not-allowed disabled:bg-neutral-500 disabled:text-white/50"
           >
             Post
           </button>
