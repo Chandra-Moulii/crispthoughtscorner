@@ -24,6 +24,7 @@ export default {
         slideDown300: "slideDown .9s ease 300ms forwards",
         slideDown600: "slideDown .9s ease 600ms forwards",
         slideDown900: "slideDown .9s ease 900ms forwards",
+        slideDown1200: "slideDown .9s ease 1200ms forwards",
       },
     },
   },

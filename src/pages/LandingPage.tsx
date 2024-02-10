@@ -74,37 +74,34 @@ export default function LandingPage() {
   if (isLoading) return <Spinner info="Authenticating..." />;
 
   return (
-    <div className="flex h-dvh flex-col gap-5 px-4 py-7">
-      <div className="flex-grow">
-        <div>
-          <h1 className="animate-slideDown300 text-3xl font-black leading-snug opacity-0 [text-wrap:balance] md:text-4xl md:leading-snug">
-            CrispThoughtsCorner,
-            <br />
-            <span className="text-skin-color">
-              Where all&nbsp;
-              <span
-                ref={spanRef}
-                className="decoration-3 relative inline-block leading-snug text-skin-accent underline decoration-dashed underline-offset-4 before:absolute before:-right-2 before:top-1/2 before:h-full before:w-1 before:-translate-y-1/2 before:bg-skin-accent after:animate-pulse md:leading-snug"
-              ></span>
-              &nbsp; Converge.
-            </span>
-          </h1>
-          <p className="my-5 animate-slideDown600 font-medium opacity-0">
-            🚀 Open the door to a community driven by shared innovation. At
-            Crisp Thoughts Corner, we believe that the journey towards
-            perfection is a continuous process, transforming complexity into
-            exceptional results.
-          </p>
-          <button
-            onClick={login}
-            disabled={isLoading}
-            className="flex animate-slideDown900 items-center justify-center gap-2 rounded-sm bg-skin-accent px-3 py-2 font-medium text-white opacity-0 outline-none ring-skin-accent/60 hover:bg-skin-accent/80 focus-visible:ring disabled:bg-skin-accent/60"
-          >
-            Continue with Auth0
-          </button>
-        </div>
+    <div className="relative h-screen px-4 py-7">
+      <div>
+        <h1 className="animate-slideDown300 text-3xl font-black leading-snug opacity-0 [text-wrap:balance] md:text-4xl md:leading-snug">
+          CrispThoughtsCorner,
+          <br />
+          <span className="text-skin-color">
+            Where all&nbsp;
+            <span
+              ref={spanRef}
+              className="decoration-3 relative inline-block leading-snug text-skin-accent underline decoration-dashed underline-offset-4 before:absolute before:-right-2 before:top-1/2 before:h-full before:w-1 before:-translate-y-1/2 before:bg-skin-accent after:animate-pulse md:leading-snug"
+            ></span>
+            &nbsp; Converge.
+          </span>
+        </h1>
+        <p className="my-5 animate-slideDown600 font-medium opacity-0">
+          🚀 Open the door to a community driven by shared innovation. At Crisp
+          Thoughts Corner, we believe that the journey towards perfection is a
+          continuous process, transforming complexity into exceptional results.
+        </p>
+        <button
+          onClick={login}
+          disabled={isLoading}
+          className="flex animate-slideDown900 items-center justify-center gap-2 rounded-sm bg-skin-accent px-3 py-2 font-medium text-white opacity-0 outline-none ring-skin-accent/60 hover:bg-skin-accent/80 focus-visible:ring disabled:bg-skin-accent/60"
+        >
+          Continue with Auth0
+        </button>
       </div>
-      <div className="text-center">
+      <div className="absolute bottom-7 left-1/2 -translate-x-1/2 text-center">
         <PostCount />
       </div>
     </div>
@@ -126,7 +123,7 @@ function PostCount() {
   }, []);
 
   return (
-    <p className="mt-10 animate-slideDown900 text-sm text-skin-color/50 opacity-0">
+    <p className="animate-slideDown1200 mt-10 text-sm text-skin-color/50 opacity-0">
       Total of
       <span className="text-2xl font-black text-skin-color">{` ${postCount} `}</span>
       posts created, with more on the way.
