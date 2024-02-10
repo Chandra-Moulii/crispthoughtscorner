@@ -1,9 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 
 import Spinner from "../components/stateless/Spinner";
 import useDarkMode from "../customHooks/useDarkmode";
+import supabase from "../supabase";
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -73,31 +74,62 @@ export default function LandingPage() {
   if (isLoading) return <Spinner info="Authenticating..." />;
 
   return (
-    <div className="px-4 pt-7">
-      <h1 className="animate-slideDown300 text-3xl font-black leading-snug opacity-0 [text-wrap:balance] md:text-4xl md:leading-snug">
-        CrispThoughtsCorner,
-        <br />
-        <span className="text-skin-color">
-          Where all&nbsp;
-          <span
-            ref={spanRef}
-            className="decoration-3 relative inline-block leading-snug text-skin-accent underline decoration-dashed underline-offset-4 before:absolute before:-right-2 before:top-1/2 before:h-full before:w-1 before:-translate-y-1/2 before:bg-skin-accent after:animate-pulse md:leading-snug"
-          ></span>
-          &nbsp; Converge.
-        </span>
-      </h1>
-      <p className="my-5 animate-slideDown600 font-medium opacity-0">
-        🚀 Open the door to a community driven by shared innovation. At Crisp
-        Thoughts Corner, we believe that the journey towards perfection is a
-        continuous process, transforming complexity into exceptional results.
-      </p>
-      <button
-        onClick={login}
-        disabled={isLoading}
-        className="flex animate-slideDown900 items-center justify-center gap-2 rounded-sm bg-skin-accent px-3 py-2 font-medium text-white opacity-0 outline-none ring-skin-accent/60 hover:bg-skin-accent/80 focus-visible:ring disabled:bg-skin-accent/60"
-      >
-        Continue with Auth0
-      </button>
+    <div className="flex h-screen flex-grow flex-col gap-5 px-4 py-7">
+      <div className="flex-grow">
+        <div>
+          <h1 className="animate-slideDown300 text-3xl font-black leading-snug opacity-0 [text-wrap:balance] md:text-4xl md:leading-snug">
+            CrispThoughtsCorner,
+            <br />
+            <span className="text-skin-color">
+              Where all&nbsp;
+              <span
+                ref={spanRef}
+                className="decoration-3 relative inline-block leading-snug text-skin-accent underline decoration-dashed underline-offset-4 before:absolute before:-right-2 before:top-1/2 before:h-full before:w-1 before:-translate-y-1/2 before:bg-skin-accent after:animate-pulse md:leading-snug"
+              ></span>
+              &nbsp; Converge.
+            </span>
+          </h1>
+          <p className="my-5 animate-slideDown600 font-medium opacity-0">
+            🚀 Open the door to a community driven by shared innovation. At
+            Crisp Thoughts Corner, we believe that the journey towards
+            perfection is a continuous process, transforming complexity into
+            exceptional results.
+          </p>
+          <button
+            onClick={login}
+            disabled={isLoading}
+            className="flex animate-slideDown900 items-center justify-center gap-2 rounded-sm bg-skin-accent px-3 py-2 font-medium text-white opacity-0 outline-none ring-skin-accent/60 hover:bg-skin-accent/80 focus-visible:ring disabled:bg-skin-accent/60"
+          >
+            Continue with Auth0
+          </button>
+        </div>
+      </div>
+      <div className="text-center">
+        <PostCount />
+      </div>
     </div>
+  );
+}
+
+function PostCount() {
+  const [postCount, setCount] = useState(0);
+
+  async function countPosts() {
+    const { error, count } = await supabase
+      .from("Posts")
+      .select("*", { count: "exact", head: true });
+    if (!error && count) setCount(count);
+  }
+
+  useEffect(() => {
+    countPosts();
+  }, []);
+
+  return (
+    <p className="mt-10 animate-slideDown900 text-sm text-skin-color/50 opacity-0">
+      Total of
+      <span className="text-2xl font-black text-skin-color">{` ${postCount} `}</span>
+      posts created, with more on the way.
+    </p>
   );
 }

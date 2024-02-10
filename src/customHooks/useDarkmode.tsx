@@ -17,6 +17,10 @@ export default function useDarkMode() {
       document.documentElement.classList.add(getDeviceTheme());
     } else if (theme === "dark") document.documentElement.classList.add("dark");
     else document.documentElement.classList.remove("dark");
+    if (!theme) {
+      localStorage.setItem("theme", "system");
+      document.documentElement.classList.add(getDeviceTheme());
+    }
   }, []);
 }
 
