@@ -74,16 +74,16 @@ export default function LandingPage() {
   if (isLoading) return <Spinner info="Authenticating..." />;
 
   return (
-    <div className="mt-auto min-h-screen w-full flex-grow flex flex-col bg-red-50">
-      <p className="flex-grow">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde mollitia,
-        atque, maiores libero aliquam optio maxime corporis distinctio tempora
-        quo voluptate consequatur fuga consequuntur velit, earum iure ratione.
-        Soluta, aut!
-      </p>
-      <p className="bg-pink-500">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam,
-      </p>
+    <div className="mt-auto flex min-h-screen w-full flex-grow flex-col bg-red-50">
+      <div className="flex  flex-grow flex-col">
+        <p className="flex-grow">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit
+          necessitatibus reiciendis eius quod debitis tempora laudantium
+          exercitationem aliquid, recusandae unde! Perspiciatis fuga doloremque
+          libero aperiam rem voluptas incidunt, unde veritatis?
+        </p>
+        <p className="mt-auto bg-pink-500">loremerjfejkwrfneri</p>
+      </div>
     </div>
   );
 
