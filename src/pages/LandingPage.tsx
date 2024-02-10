@@ -89,9 +89,10 @@ export default function LandingPage() {
           </span>
         </h1>
         <p className="my-5 animate-slideDown600 font-medium opacity-0">
-          🚀 Open the door to a community driven by shared innovation. At Crisp
-          Thoughts Corner, we believe that the journey towards perfection is a
-          continuous process, transforming complexity into exceptional results.
+          Step into a realm of collaborative innovation at Crisp Thoughts Corner
+          - your premier destination for insightful blogging experiences! Unlock
+          a world of shared ideas and creativity in every post. Welcome to a
+          space where innovation thrives and ideas come to life.
         </p>
         <button
           onClick={login}
@@ -123,7 +124,7 @@ function PostCount() {
   }, []);
 
   return (
-    <p className="animate-slideDown1200 mt-10 text-sm text-skin-color/50 opacity-0">
+    <p className="mt-10 animate-slideDown1200 text-sm text-skin-color/50 opacity-0">
       Total of
       <span className="text-2xl font-black text-skin-color">{` ${postCount} `}</span>
       posts created, with more on the way. Join the community
