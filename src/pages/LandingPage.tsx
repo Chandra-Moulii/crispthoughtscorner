@@ -74,7 +74,7 @@ export default function LandingPage() {
   if (isLoading) return <Spinner info="Authenticating..." />;
 
   return (
-    <div className="flex h-screen flex-grow flex-col gap-5 px-4 py-7">
+    <div className="flex h-dvh flex-col gap-5 px-4 py-7">
       <div className="flex-grow">
         <div>
           <h1 className="animate-slideDown300 text-3xl font-black leading-snug opacity-0 [text-wrap:balance] md:text-4xl md:leading-snug">
