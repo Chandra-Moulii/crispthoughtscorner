@@ -33,8 +33,8 @@ export default function Settings() {
       setTheme("system");
     } else setTheme(theme);
     if (theme === "system") {
-      document.documentElement.classList.add(getDeviceTheme());
-    } else if (theme === "dark") document.documentElement.classList.add("dark");
+      document.documentElement.className = getDeviceTheme();
+    } else if (theme === "dark") document.documentElement.className = "dark";
     else document.documentElement.classList.remove("dark");
   }, [theme]);
 

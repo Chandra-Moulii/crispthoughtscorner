@@ -14,12 +14,12 @@ export default function useDarkMode() {
       .addEventListener("change", handleThemeChange);
     const theme = localStorage.getItem("theme");
     if (theme === "system") {
-      document.documentElement.classList.add(getDeviceTheme());
-    } else if (theme === "dark") document.documentElement.classList.add("dark");
+      document.documentElement.className = getDeviceTheme();
+    } else if (theme === "dark") document.documentElement.className = "dark";
     else document.documentElement.classList.remove("dark");
     if (!theme) {
       localStorage.setItem("theme", "system");
-      document.documentElement.classList.add(getDeviceTheme());
+      document.documentElement.className = getDeviceTheme();
     }
   }, []);
 }

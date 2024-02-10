@@ -75,7 +75,7 @@ export default function LandingPage() {
 
   return (
     <div className="px-4 py-7">
-      <div className="flex-grow">
+      <div>
         <h1 className="animate-slideDown300 text-3xl font-black leading-snug opacity-0 [text-wrap:balance] md:text-4xl md:leading-snug">
           CrispThoughtsCorner,
           <br />
