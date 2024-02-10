@@ -74,7 +74,21 @@ export default function LandingPage() {
   if (isLoading) return <Spinner info="Authenticating..." />;
 
   return (
-    <div className="relative flex h-dvh flex-grow flex-col px-4 py-7">
+    <div className="mt-auto min-h-screen w-full flex-grow flex flex-col bg-red-50">
+      <p className="flex-grow">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde mollitia,
+        atque, maiores libero aliquam optio maxime corporis distinctio tempora
+        quo voluptate consequatur fuga consequuntur velit, earum iure ratione.
+        Soluta, aut!
+      </p>
+      <p className="bg-pink-500">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam,
+      </p>
+    </div>
+  );
+
+  return (
+    <div className="px-4 py-7">
       <div className="flex-grow">
         <h1 className="animate-slideDown300 text-3xl font-black leading-snug opacity-0 [text-wrap:balance] md:text-4xl md:leading-snug">
           CrispThoughtsCorner,
@@ -101,7 +115,7 @@ export default function LandingPage() {
           Continue with Auth0
         </button>
       </div>
-      <div className="absolute bottom-7 left-1/2 w-full -translate-x-1/2 text-center">
+      <div>
         <PostCount />
       </div>
     </div>
@@ -126,7 +140,7 @@ function PostCount() {
     <p className="animate-slideDown1200 mt-10 text-sm text-skin-color/50 opacity-0">
       Total of
       <span className="text-2xl font-black text-skin-color">{` ${postCount} `}</span>
-      posts created, with more on the way.
+      posts created, with more on the way. Join the community
     </p>
   );
 }
