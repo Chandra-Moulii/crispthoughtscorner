@@ -6,7 +6,7 @@
   :root {
     --background: 255 255 255;
     --text-color: 44 44 44;
-    --accent: 20 109 173;
+    --accent: 56 118 191;
     --error: 239 68 68;
   }
   :root.dark {

@@ -122,7 +122,7 @@ export default function NewPost() {
             className={`text-xs ${postTitle.length > 130 && postTitle.length < 150 ? "text-yellow-500" : postTitle.length >= 150 && "text-skin-error"}`}
           >
             {postTitle.length > 150
-              ? "Character limit exceeded !!!"
+              ? `Character limit exceeded !! (${postTitle.length}/150)`
               : `Used ${postTitle.length} characters of 150`}
           </p>
         </div>

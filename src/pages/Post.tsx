@@ -200,7 +200,7 @@ export default function Post() {
               </>
             )}
             {data.postEdited && (
-              <span className="text-skin-color/60">{` - (Edited) `}</span>
+              <span className="text-skin-color/60">{` (Edited) `}</span>
             )}
           </p>
 
@@ -218,7 +218,7 @@ export default function Post() {
               >
                 Options
                 <svg
-                  className="aspect-square w-5 fill-skin-color/60"
+                  className="aspect-square w-4 fill-skin-color/60"
                   viewBox="0 0 20 20"
                 >
                   <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" />
@@ -234,7 +234,7 @@ export default function Post() {
                 aria-labelledby="menu-button"
               >
                 <button
-                  className="flex w-full items-center justify-between rounded p-2 px-3 text-left outline-none ring-inset hover:bg-skin-color/10 focus-visible:ring-2"
+                  className="flex w-full items-center justify-between rounded p-2 px-3 text-left outline-none ring-inset hover:bg-skin-color/10 focus-visible:bg-skin-color/10"
                   onClick={copyLink}
                 >
                   <p>Copy Link</p>
@@ -243,7 +243,7 @@ export default function Post() {
                   </p>
                 </button>
                 <button
-                  className="flex w-full items-center justify-between rounded p-2 px-3 text-left outline-none ring-inset hover:bg-skin-color/10 focus-visible:ring-2"
+                  className="flex w-full items-center justify-between rounded p-2 px-3 text-left outline-none ring-inset hover:bg-skin-color/10 focus-visible:bg-skin-color/10"
                   onClick={() => copyMarkDown(data.postDescription)}
                 >
                   <p>Copy Markdown</p>
@@ -252,7 +252,7 @@ export default function Post() {
                   </p>
                 </button>
                 <button
-                  className="flex w-full items-center justify-between rounded p-2 px-3 text-left outline-none ring-inset hover:bg-skin-color/10 focus-visible:ring-2"
+                  className="flex w-full items-center justify-between rounded p-2 px-3 text-left outline-none ring-inset hover:bg-skin-color/10 focus-visible:bg-skin-color/10"
                   onClick={downloadOfflinePdf}
                 >
                   <p>Download post</p>

@@ -104,7 +104,7 @@ export default function Feed() {
             {filterPosts()?.map((post: postType) => {
               return (
                 <div
-                  className="group my-1 flex items-center justify-between gap-x-3 gap-y-1 truncate font-medium decoration-skin-color decoration-1 outline-none ring-skin-accent/30"
+                  className="group my-1 flex items-center justify-between gap-x-1 gap-y-1 truncate font-medium decoration-skin-color decoration-1 outline-none ring-skin-accent/30"
                   key={post.id}
                 >
                   {post.postAuthor === "crispthoughtscorneradmin@gmail.com" && (
@@ -112,7 +112,7 @@ export default function Feed() {
                       to={`/${post?.postAuthor?.split("@")[0]}`}
                       className="text-skin-accent decoration-current decoration-2 underline-offset-2 outline-none hover:underline focus-visible:underline focus-visible:decoration-2"
                     >
-                      By Admin -
+                      Admin -
                     </Link>
                   )}
                   <Link

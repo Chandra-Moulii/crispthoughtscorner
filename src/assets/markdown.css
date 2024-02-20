@@ -1,7 +1,3 @@
-.tw-none button {
-  touch-action: none;
-}
-
 .tw-none * {
   @apply leading-relaxed;
 }
@@ -30,7 +26,7 @@
 
 .tw-none p,
 .tw-none span {
-  @apply my-3 break-words;
+  @apply my-3 break-words leading-6;
 }
 
 .tw-none ul {
