@@ -26,7 +26,7 @@
 
 .tw-none p,
 .tw-none span {
-  @apply my-3 break-words leading-6;
+  @apply mb-3 break-words;
 }
 
 .tw-none ul {

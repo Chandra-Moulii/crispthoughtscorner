@@ -100,7 +100,7 @@ export default function Posts() {
         className="my-2 before:text-skin-color/50 empty:before:content-[attr(data-info)]"
       >
         {searchValue && filterPosts().length === 0 ? (
-          <p className="break-all text-sm">
+          <p className="break-all">
             No posts Found for '{searchValue}'&nbsp;
             <button
               className="cursor-pointer text-skin-error decoration-skin-error decoration-1 underline-offset-4 outline-none ring-skin-accent/30 hover:decoration-2 focus:decoration-2 focus-visible:underline"

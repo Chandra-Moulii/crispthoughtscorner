@@ -141,6 +141,8 @@ export default function Post() {
       <ErrorPage info="Hmm...this post doesn’t exist. Try searching for someone else." />
     );
 
+  if (!isAuthenticated) return <Spinner info="just a sec..." />;
+
   return (
     <div className="printable relative px-4">
       <div
@@ -179,7 +181,7 @@ export default function Post() {
           <h1 className="my-1 mb-2 break-words text-2xl font-black">
             {data?.postTitle}
           </h1>
-          <p className="not-printable text-sm">
+          <p className="not-printable text-sm leading-relaxed">
             {`Posted ${getRelativeTime()} by `}
             {data?.postAuthor === user?.email ? (
               <span>you</span>
@@ -272,7 +274,7 @@ export default function Post() {
           </p>
 
           <hr className="border-1 my-3 border-skin-color/20" />
-          <article className="tw-none relative pb-20 text-sm">
+          <article className="tw-none relative pb-20">
             <Markdown
               options={{
                 overrides: {
