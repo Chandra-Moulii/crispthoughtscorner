@@ -93,21 +93,3 @@
   @apply relative top-[2px] aspect-square w-4 appearance-none rounded-sm border-2 border-skin-color/50 after:absolute after:-top-[2px] after:left-[2px] after:hidden after:aspect-square after:w-1 after:text-xs after:content-['\2713'] checked:after:block;
 }
 
-@media print {
-  .printable {
-    display: block;
-    padding-top: 2rem;
-  }
-  .not-printable,
-  .menu,
-  section {
-    display: none;
-  }
-  hr {
-    visibility: hidden;
-    margin: 2rem 0;
-  }
-  body {
-    -webkit-print-color-adjust: exact;
-  }
-}

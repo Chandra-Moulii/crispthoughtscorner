@@ -59,10 +59,6 @@ export default function Post() {
           event.preventDefault();
           copyLink();
           break;
-        case "D":
-          event.preventDefault();
-          downloadOfflinePdf();
-          break;
         case "M":
           event.preventDefault();
           copyMarkDown(data.postDescription);
@@ -74,11 +70,6 @@ export default function Post() {
     if (pressedKey === "ESCAPE") {
       setMenuState(false);
     }
-  }
-
-  function downloadOfflinePdf() {
-    setMenuState(false);
-    window.print();
   }
 
   function millisecondsToHMS(milliseconds: number) {
@@ -181,7 +172,7 @@ export default function Post() {
           <h1 className="my-1 mb-2 break-words text-2xl font-black">
             {data?.postTitle}
           </h1>
-          <p className="not-printable text-sm leading-relaxed">
+          <p className="text-sm leading-relaxed">
             {`Posted ${getRelativeTime()} by `}
             {data?.postAuthor === user?.email ? (
               <span>you</span>
@@ -253,25 +244,9 @@ export default function Post() {
                     Ctrl+M
                   </p>
                 </button>
-                <button
-                  className="flex w-full items-center justify-between rounded p-2 px-3 text-left outline-none ring-inset hover:bg-skin-color/10 focus-visible:bg-skin-color/10"
-                  onClick={downloadOfflinePdf}
-                >
-                  <p>Download post</p>
-                  <p className="hidden text-xs text-skin-color/40 md:inline-block lg:inline-block">
-                    Ctrl+D
-                  </p>
-                </button>
               </div>
             )}
           </div>
-
-          <p className="printable hidden">
-            Live Preview -&nbsp;
-            <a className="text-skin-accent" href={window.location.href}>
-              {window.location.href}
-            </a>
-          </p>
 
           <hr className="border-1 my-3 border-skin-color/20" />
           <article className="tw-none relative pb-20">
