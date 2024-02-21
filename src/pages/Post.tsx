@@ -24,6 +24,7 @@ export default function Post() {
     loginWithRedirect,
   } = useAuth0();
   const progressBarRef = useRef<HTMLDivElement>(null);
+  const [fullScreenMode, setFullScreenMode] = useState(false);
   const [moveToTopButtonVisible, setMoveToTopButtonStatus] = useState(false);
 
   const { data, isLoading, error } = useQuery(["post", id], fetchPost, {
@@ -104,14 +105,29 @@ export default function Post() {
     setMenuState(false);
   }
 
+  function fullScreen() {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else {
+      document.documentElement.requestFullscreen().catch((e) => {
+        console.log(e);
+      });
+    }
+  }
+
   function copyMarkDown(markdown: string) {
     toast.success("Markdown copied to clipboard successfully");
     navigator.clipboard.writeText(markdown);
     setMenuState(false);
   }
+
+  function handleFullScreenChange() {
+    setFullScreenMode((prev) => !prev);
+  }
   useDarkMode();
 
   useEffect(() => {
+    document.addEventListener("fullscreenchange", handleFullScreenChange);
     window.addEventListener("keydown", handleCtrlKeyPress);
     window.addEventListener("scroll", handleScroll);
     function findScrolledDistance() {
@@ -121,11 +137,13 @@ export default function Post() {
     }
     document.addEventListener("scroll", findScrolledDistance);
     return () => {
+      if (document.fullscreenElement) document.exitFullscreen();
       document.removeEventListener("scroll", findScrolledDistance);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("keydown", handleCtrlKeyPress);
+      document.removeEventListener("fullscreenchange", handleFullScreenChange);
     };
-  });
+  }, []);
 
   if (error)
     return (
@@ -200,7 +218,7 @@ export default function Post() {
           {/* Dropdown */}
           <ToastMessage />
           <div className="menu relative mt-3 inline-block select-none text-skin-color">
-            <div>
+            <div className="flex gap-2">
               <button
                 type="button"
                 onClick={() => setMenuState((prev) => !prev)}
@@ -216,6 +234,29 @@ export default function Post() {
                 >
                   <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" />
                 </svg>
+              </button>
+              <button
+                className="flex items-center gap-1 rounded-md border-2 border-skin-color/20 px-2 py-1 text-sm font-medium outline-none ring-skin-color/20 focus-visible:ring-2"
+                onClick={fullScreen}
+                title="Toggle Full Screen Mode"
+              >
+                {fullScreenMode ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 -960 960 960"
+                    className="aspect-square w-6"
+                  >
+                    <path d="M240-120v-120H120v-80h200v200h-80Zm400 0v-200h200v80H720v120h-80ZM120-640v-80h120v-120h80v200H120Zm520 0v-200h80v120h120v80H640Z" />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 -960 960 960"
+                    className="aspect-square w-5"
+                  >
+                    <path d="M120-120v-200h80v120h120v80H120Zm520 0v-80h120v-120h80v200H640ZM120-640v-200h200v80H200v120h-80Zm640 0v-120H640v-80h200v200h-80Z" />
+                  </svg>
+                )}
               </button>
             </div>
 
