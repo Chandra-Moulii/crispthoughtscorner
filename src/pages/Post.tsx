@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 
-import "../assets/markdown.css";
 import supabase from "../supabase";
 import Header from "../components/stateless/Header";
 import ErrorPage from "../components/stateless/Error";
@@ -153,7 +152,7 @@ export default function Post() {
   if (!isAuthenticated) return <Spinner info="just a sec..." />;
 
   return (
-    <div className="printable relative px-4">
+    <div className="relative px-4 printable">
       <div
         ref={progressBarRef}
         className="fixed left-0 top-0 z-20 h-[6px] w-0 bg-gradient-to-r from-indigo-800 via-purple-800 to-pink-800 text-center text-sm"
@@ -169,7 +168,7 @@ export default function Post() {
             </div>
             <button
               onClick={() => loginWithRedirect()}
-              className="rounded-sm bg-skin-accent px-3 py-1 text-white outline-none ring-skin-accent/60 hover:bg-skin-accent/80 focus-visible:ring"
+              className="px-3 py-1 text-white rounded-sm outline-none bg-skin-accent ring-skin-accent/60 hover:bg-skin-accent/80 focus-visible:ring"
             >
               Login
             </button>
@@ -187,7 +186,7 @@ export default function Post() {
         <Spinner info="Just a sec" />
       ) : (
         <>
-          <h1 className="my-1 mb-2 break-words text-2xl font-black">
+          <h1 className="my-1 mb-2 text-2xl font-black break-words">
             {data?.postTitle}
           </h1>
           <p className="text-sm leading-relaxed">
@@ -199,12 +198,12 @@ export default function Post() {
                 {isAuthenticated ? (
                   <Link
                     to={`/${data?.postAuthor?.split("@")[0]}`}
-                    className="truncate rounded font-medium text-skin-accent decoration-1 underline-offset-2 outline-none focus:underline"
+                    className="font-medium truncate rounded outline-none text-skin-accent decoration-1 underline-offset-2 focus:underline"
                   >
                     @{data?.postAuthor?.split("@")[0]}
                   </Link>
                 ) : (
-                  <span className="truncate rounded font-medium text-skin-accent decoration-1 underline-offset-2">
+                  <span className="font-medium truncate rounded text-skin-accent decoration-1 underline-offset-2">
                     @{data?.postAuthor?.split("@")[0]}
                   </span>
                 )}
@@ -217,26 +216,26 @@ export default function Post() {
 
           {/* Dropdown */}
           <ToastMessage />
-          <div className="menu relative mt-3 inline-block select-none text-skin-color">
+          <div className="relative inline-block mt-3 select-none menu text-skin-color">
             <div className="flex gap-2">
               <button
                 type="button"
                 onClick={() => setMenuState((prev) => !prev)}
-                className="flex items-center gap-1 rounded-md border-2 border-skin-color/20 px-2 py-1 text-sm font-medium outline-none ring-skin-color/20 focus-visible:ring-2"
+                className="flex items-center gap-1 px-2 py-1 text-sm font-medium border-2 rounded-md outline-none border-skin-color/20 ring-skin-color/20 focus-visible:ring-2"
                 id="menu-button"
                 aria-expanded="true"
                 aria-haspopup="true"
               >
                 Options
                 <svg
-                  className="aspect-square w-4 fill-skin-color/60"
+                  className="w-4 aspect-square fill-skin-color/60"
                   viewBox="0 0 20 20"
                 >
                   <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" />
                 </svg>
               </button>
               <button
-                className="flex items-center gap-1 rounded-md border-2 border-skin-color/20 px-2 py-1 text-sm font-medium outline-none ring-skin-color/20 focus-visible:ring-2"
+                className="flex items-center gap-1 px-2 py-1 text-sm font-medium border-2 rounded-md outline-none border-skin-color/20 ring-skin-color/20 focus-visible:ring-2"
                 onClick={fullScreen}
                 title="Toggle Full Screen Mode"
               >
@@ -244,7 +243,7 @@ export default function Post() {
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 -960 960 960"
-                    className="aspect-square w-5 fill-skin-color"
+                    className="w-5 aspect-square fill-skin-color"
                   >
                     <path d="M240-120v-120H120v-80h200v200h-80Zm400 0v-200h200v80H720v120h-80ZM120-640v-80h120v-120h80v200H120Zm520 0v-200h80v120h120v80H640Z" />
                   </svg>
@@ -252,7 +251,7 @@ export default function Post() {
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 -960 960 960"
-                    className="aspect-square w-5 fill-skin-color"
+                    className="w-5 aspect-square fill-skin-color"
                   >
                     <path d="M120-120v-200h80v120h120v80H120Zm520 0v-80h120v-120h80v200H640ZM120-640v-200h200v80H200v120h-80Zm640 0v-120H640v-80h200v200h-80Z" />
                   </svg>
@@ -268,7 +267,7 @@ export default function Post() {
                 aria-labelledby="menu-button"
               >
                 <button
-                  className="flex w-full items-center justify-between rounded p-2 px-3 text-left outline-none ring-inset hover:bg-skin-color/10 focus-visible:bg-skin-color/10"
+                  className="flex items-center justify-between w-full p-2 px-3 text-left rounded outline-none ring-inset hover:bg-skin-color/10 focus-visible:bg-skin-color/10"
                   onClick={copyLink}
                 >
                   <p>Copy Link</p>
@@ -277,7 +276,7 @@ export default function Post() {
                   </p>
                 </button>
                 <button
-                  className="flex w-full items-center justify-between rounded p-2 px-3 text-left outline-none ring-inset hover:bg-skin-color/10 focus-visible:bg-skin-color/10"
+                  className="flex items-center justify-between w-full p-2 px-3 text-left rounded outline-none ring-inset hover:bg-skin-color/10 focus-visible:bg-skin-color/10"
                   onClick={() => copyMarkDown(data.postDescription)}
                 >
                   <p>Copy Markdown</p>
@@ -289,8 +288,8 @@ export default function Post() {
             )}
           </div>
 
-          <hr className="border-1 my-3 border-skin-color/20" />
-          <article className="tw-none relative pb-20">
+          <hr className="my-3 border-1 border-skin-color/20" />
+          <article className="relative pb-20 prose prose-neutral dark:prose-neutral dark:prose-invert dark:text-skin-color">
             <Markdown
               options={{
                 overrides: {
@@ -315,9 +314,9 @@ export default function Post() {
 
 const MoveToTopButton = () => {
   return (
-    <div className="fixed bottom-5 left-1/2 my-2 -translate-x-1/2 rounded-full bg-skin-color">
+    <div className="fixed my-2 -translate-x-1/2 rounded-full bottom-5 left-1/2 bg-skin-color">
       <button
-        className="rounded-full p-1 outline-none ring-skin-accent ring-offset-2 ring-offset-skin-background focus-visible:ring-2"
+        className="p-1 rounded-full outline-none ring-skin-accent ring-offset-2 ring-offset-skin-background focus-visible:ring-2"
         onClick={() => (document.documentElement.scrollTop = 0)}
       >
         <svg

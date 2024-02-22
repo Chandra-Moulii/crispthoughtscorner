@@ -18,7 +18,7 @@ export default function ImageDecoy(props: propsType) {
         src={src}
         title={title}
         onError={handleImageError}
-        className="select-none"
+        className="prose-img:h-auto select-none bg-neutral-50"
       />
     );
     setImageComponent(imgComponent);

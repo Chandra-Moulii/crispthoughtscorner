@@ -4,7 +4,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import "../assets/markdown.css";
 import supabase from "../supabase";
 import Header from "../components/stateless/Header";
 import ImageDecoy from "../components/stateless/ImageDecoy";
@@ -140,7 +139,7 @@ export default function EditPost() {
             ref={ref}
             onChange={(e) => setPostTitle(e.target.value)}
             placeholder="Give a title to your post"
-            className="mt-1 block w-full rounded-sm border-b-2 border-skin-color/40 bg-skin-background py-1 outline-none ring-skin-color/30 placeholder:text-skin-color/40 focus:border-skin-color/70"
+            className="block w-full py-1 mt-1 border-b-2 rounded-sm outline-none border-skin-color/40 bg-skin-background ring-skin-color/30 placeholder:text-skin-color/40 focus:border-skin-color/70"
           />
           <div className="my-3 text-skin-color/60">
             <p
@@ -154,7 +153,7 @@ export default function EditPost() {
         </div>
 
         <>
-          <header className="mt-3 flex gap-1 text-sm text-skin-color/60">
+          <header className="flex gap-1 mt-3 text-sm text-skin-color/60">
             <button
               type="button"
               className={`cursor-pointer px-4 py-2 outline-none ring-inset ring-skin-accent/50 focus-visible:ring-2 ${
@@ -184,10 +183,10 @@ export default function EditPost() {
                 onChange={sanitizePostDescription}
                 id="postDescription"
                 placeholder="Note : Markdown supported"
-                className="h-80 w-full resize-none rounded-b-md bg-skin-accent/10 p-3 align-top leading-relaxed outline-none ring-skin-color/30 placeholder:text-skin-color/40"
+                className="w-full p-3 leading-relaxed align-top outline-none resize-none h-80 rounded-b-md bg-skin-accent/10 ring-skin-color/30 placeholder:text-skin-color/40"
               />
             ) : (
-              <section className="tw-none h-80 w-full overflow-x-hidden bg-skin-accent/10 p-3">
+              <section className="w-full p-3 overflow-x-hidden prose prose-neutral dark:prose-neutral dark:prose-invert dark:text-skin-color h-80 bg-skin-accent/10">
                 <Markdown
                   options={{
                     overrides: {
@@ -209,15 +208,15 @@ export default function EditPost() {
           </>
         </>
 
-        <div className="my-3 flex flex-wrap items-start justify-between gap-2 gap-y-6">
+        <div className="flex flex-wrap items-start justify-between gap-2 my-3 gap-y-6">
           <p className="text-xs text-skin-color/50">
             * Changes may take a while to appear after editing.
           </p>
-          <div className="w-ful flex flex-grow justify-end gap-2">
+          <div className="flex justify-end flex-grow gap-2 w-ful">
             <button
               type="button"
               onClick={closeNewPost}
-              className="rounded-sm bg-skin-error px-3 py-1 text-white outline-none ring-skin-error/60 hover:bg-skin-error/80 focus-visible:ring"
+              className="px-3 py-1 text-white rounded-sm outline-none bg-skin-error ring-skin-error/60 hover:bg-skin-error/80 focus-visible:ring"
             >
               Cancel
             </button>
@@ -225,7 +224,7 @@ export default function EditPost() {
               type="submit"
               ref={btnref}
               disabled={postTitle.length < 5 || postTitle.length > 150}
-              className="rounded-sm bg-skin-accent px-3 py-1 text-white outline-none ring-skin-accent/60 hover:bg-skin-accent/80 focus-visible:ring disabled:cursor-not-allowed disabled:bg-neutral-500 disabled:text-white/50"
+              className="px-3 py-1 text-white rounded-sm outline-none bg-skin-accent ring-skin-accent/60 hover:bg-skin-accent/80 focus-visible:ring disabled:cursor-not-allowed disabled:bg-neutral-500 disabled:text-white/50"
             >
               Post
             </button>

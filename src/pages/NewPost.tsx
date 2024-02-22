@@ -4,7 +4,6 @@ import Markdown from "markdown-to-jsx";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link, useNavigate } from "react-router-dom";
 
-import "../assets/markdown.css";
 import supabase from "../supabase";
 import { openDialog, closeDialog } from "../utils/HandleDialogs";
 import ImageDecoy from "../components/stateless/ImageDecoy";
@@ -160,7 +159,7 @@ export default function NewPost() {
                 className="h-80 w-full resize-none rounded-b-md bg-skin-accent/10 p-3 align-top leading-relaxed outline-none ring-skin-color/30 placeholder:text-skin-color/40"
               />
             ) : (
-              <section className="tw-none h-80 w-full overflow-x-hidden bg-skin-accent/10 p-3">
+              <section className="prose prose-neutral dark:prose-neutral dark:prose-invert h-80 w-full overflow-x-hidden bg-skin-accent/10 p-3 dark:text-skin-color">
                 <Markdown
                   options={{
                     overrides: {
